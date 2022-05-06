@@ -7,7 +7,7 @@ csv_lines = []
 path, csv_path, tgf_extension, csv_extension = "", "", "", ""
 
 
-def init_paths(path_to_tgf, path_to_csv):
+def __init_paths(path_to_tgf, path_to_csv):
     """Initialize the path to the .tgf and the .csv file."""
     global path, csv_path, tgf_extension, csv_extension
     path = path_to_tgf
@@ -16,7 +16,7 @@ def init_paths(path_to_tgf, path_to_csv):
     _, csv_extension = os.path.splitext(csv_path)
 
 
-def get_prefix(string, delimiter):
+def __get_prefix(string, delimiter):
     """Return the last element from string, after the delimiter
 
     If string ends in the delimiter or the delimiter is absent,
@@ -26,7 +26,7 @@ def get_prefix(string, delimiter):
     return postfix if (delim and postfix) else prefix
 
 
-def enforce_version(version):
+def __enforce_version(version):
     """Enforces a specific syntax for the version of a dependency.
     The rule is that every version should have a suffix, middle, and a prefix. E.g. '1.0' will be '1.0.0', and '2.30' will be '2.30.0'.
     """
@@ -35,29 +35,29 @@ def enforce_version(version):
         split = splits[-1]
         if not any(c.isalpha() for c in split):
             version = version + ".0"
-            version = enforce_version(version)
+            version = __enforce_version(version)
     return version
 
 
-def split_name_and_version(val):
+def __split_name_and_version(val):
     """Returns the package name and version.
 
     If the last word of the value given is either "test", "compile" or "runtime" it is removed from the string.
     When this is done, or it is not the case, we know that the last "word" of the string is the version number, using ":" as a delimiter.
     """
-    last_word = get_prefix(val, ":")
+    last_word = __get_prefix(val, ":")
     if last_word == "test" or last_word == "compile" or last_word == "runtime":
         tmp_package = val[:-(len(last_word) + 1)]
-        version = get_prefix(tmp_package, ":")
+        version = __get_prefix(tmp_package, ":")
         package = tmp_package[:-(len(version) + 1)]
     else:
-        version = get_prefix(val, ":")
+        version = __get_prefix(val, ":")
         package = val[:-(len(version) + 1)]
 
-    return package, enforce_version(version)
+    return package, __enforce_version(version)
 
 
-def row_already_in_csv(line_to_check):
+def __row_already_in_csv(line_to_check):
     """Loads the .csv file and checks if the given line is already in the .csv file."""
     for line in csv_lines:
         if line_to_check == line:
@@ -65,7 +65,7 @@ def row_already_in_csv(line_to_check):
     return False
 
 
-def load_files():
+def __load_files():
     """ Loads the file givens as the first argument to the script.
     The data is expected to be of type .tgf, if this is not the case, the script will exit with error-code 0.
 
@@ -100,7 +100,7 @@ def load_files():
     file.close()
 
     if os.path.exists(csv_path):
-        with open(csv_path, "r", encoding='UTF8') as csv_file:
+        with open(csv_path, "r", encoding="UTF8") as csv_file:
             reader = csv.reader(csv_file, delimiter=",")
             for row in reader:
                 csv_lines.append(row)
@@ -109,34 +109,34 @@ def load_files():
     return packages, dependencies
 
 
-def create_csv_data():
+def __create_csv_data():
     """Given the dictionary with the packages, and the list of which package uses another, create the wanted output format.
     """
-    packages, dependencies = load_files()
-    csv_output = []
+    packages, dependencies = __load_files()
+    csv_data = []
     for key, val in packages.items():
-        package, version = split_name_and_version(val)
+        package, version = __split_name_and_version(val)
 
         for info in dependencies:
             if key == info[0]:
-                dependency, dependency_version = split_name_and_version(packages[info[1]])
+                dependency, dependency_version = __split_name_and_version(packages[info[1]])
                 row = [os.path.basename(path)[:-4], package, version, dependency, dependency_version, info[2]]
-                if not row_already_in_csv(row):
-                    csv_output.append(row)
-    return csv_output
+                if not __row_already_in_csv(row):
+                    csv_data.append(row)
+    return csv_data
 
 
 def create_csv(path_to_tgf, path_to_csv):
     """Using the .tgf file at the given path, create a .csv file at the other give path."""
-    init_paths(path_to_tgf, path_to_csv)
-    csv_data = create_csv_data()
+    __init_paths(path_to_tgf, path_to_csv)
+    csv_data = __create_csv_data()
 
     fields = ["project-name", "package-name", "package-version", "depends-on", "version", "scope"]
     write_fields = False
-    if not row_already_in_csv(fields):
+    if not __row_already_in_csv(fields):
         write_fields = True
 
-    with open(csv_path, 'w', encoding='UTF8', newline='') as file:
+    with open(csv_path, "w", encoding="UTF8", newline="") as file:
         list_writer = csv.writer(file)
         if csv_lines:
             list_writer.writerows(csv_lines)
