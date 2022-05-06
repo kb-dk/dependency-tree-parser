@@ -26,13 +26,16 @@ def get_prefix(string, delimiter):
     return postfix if (delim and postfix) else prefix
 
 
-def restructure_version(version):
+def enforce_version(version):
+    """Enforces a specific syntax for the version of a dependency.
+    The rule is that every version should have a suffix, middle, and a prefix. E.g. '1.0' will be '1.0.0', and '2.30' will be '2.30.0'.
+    """
     splits = version.split(".")
     if len(splits) < 3:
         split = splits[-1]
         if not any(c.isalpha() for c in split):
             version = version + ".0"
-            version = restructure_version(version)
+            version = enforce_version(version)
     return version
 
 
@@ -51,7 +54,7 @@ def split_name_and_version(val):
         version = get_prefix(val, ":")
         package = val[:-(len(version) + 1)]
 
-    return package, restructure_version(version)
+    return package, enforce_version(version)
 
 
 def row_already_in_csv(line_to_check):
