@@ -54,7 +54,7 @@ def __split_name_and_version(val):
         version = __get_prefix(val, ":")
         package = val[:-(len(version) + 1)]
 
-    return package, __enforce_version(version)
+    return package, version  # __enforce_version(version)
 
 
 def __row_already_in_csv(line_to_check):
@@ -137,7 +137,7 @@ def create_csv(path_to_tgf, path_to_csv):
         write_fields = True
 
     with open(csv_path, "w", encoding="UTF8", newline="") as file:
-        list_writer = csv.writer(file)
+        list_writer = csv.writer(file, quoting=csv.QUOTE_ALL)
         if csv_lines:
             list_writer.writerows(csv_lines)
 
