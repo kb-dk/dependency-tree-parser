@@ -17,13 +17,13 @@ def __init_paths(path_to_tgf, path_to_csv):
 
 
 def __get_prefix(string, delimiter):
-    """Return the last element from string, after the delimiter
+    """Returns the last element after the delimiter from the given string.
 
-    If string ends in the delimiter or the delimiter is absent,
-    returns the original string without the delimiter.
+    If the string ends in the delimiter or if the delimiter is absent,
+    then return the original string without the delimiter.
     """
-    prefix, delim, postfix = string.rpartition(delimiter)
-    return postfix if (delim and postfix) else prefix
+    prefix, mid, postfix = string.rpartition(delimiter)
+    return postfix if (mid and postfix) else prefix
 
 
 def __enforce_version(version):
