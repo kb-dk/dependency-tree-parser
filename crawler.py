@@ -1,6 +1,7 @@
 import logging
 import os
 import subprocess
+import xml.etree.ElementTree as xml
 from collections import defaultdict
 from pathlib import Path
 
@@ -120,9 +121,30 @@ def find_parent_dirs_and_move_children(root_dir):
             os.rename(child_path, new_child_path)
 
 
+def pom_parent_finder(path):
+    ns = "http://maven.apache.org/POM/4.0.0"
+    xml.register_namespace('', ns)
+    tree = xml.ElementTree()
+    tree.parse(path)
+    artifact_id = tree.find("{%s}artifactId" % ns)
+
+    parent_artifact_id = None
+    for elem in tree.getroot().findall("{%s}parent" % ns):
+        parent_artifact_id = elem.find("{%s}artifactId" % ns)
+
+    if parent_artifact_id is None or (parent_artifact_id.text == "sbforge-parent" or parent_artifact_id.text == "sbprojects-parent"):
+        return
+
+
+def create_new_pom_folder():
+    os.mkdir("new_releases")
+
+
 # find_parent_dirs_and_move_children("releases")
 
-if __name__ == '__main__':
-    nexus_url = "https://sbforge.org/nexus/content/repositories/releases"
-    crawl_nexus(nexus_url, 'releases')
-    find_parent_dirs_and_move_children('releases')
+# if __name__ == '__main__':
+#     nexus_url = "https://sbforge.org/nexus/content/repositories/releases"
+#     crawl_nexus(nexus_url, 'releases')
+#     find_parent_dirs_and_move_children('releases')
+
+pom_parent_finder('pom.xml')
