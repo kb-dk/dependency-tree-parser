@@ -1,5 +1,6 @@
 import logging
 import os
+import shutil
 import subprocess
 import xml.etree.ElementTree as xml
 from collections import defaultdict
@@ -133,11 +134,23 @@ def pom_parent_finder(path):
         parent_artifact_id = elem.find("{%s}artifactId" % ns)
 
     if parent_artifact_id is None or (parent_artifact_id.text == "sbforge-parent" or parent_artifact_id.text == "sbprojects-parent"):
-        return
+        move_parent_pom(path, artifact_id)
 
 
-def create_new_pom_folder():
-    os.mkdir("new_releases")
+def move_parent_pom(pom_path, artifact_id):
+    Path("new_releases").mkdir(exist_ok=True)
+    old_path = pom_path
+    pom_path = pom_path.strip("/pom.xml")
+    pom_path = pom_path.rsplit("/", 1)[0]
+    pom_path = pom_path.split("releases/", 1)[-1]
+
+    artifact_id = artifact_id.text.rsplit("-parent", 1)[0] + "-parent"
+
+    full_path_string = "new_releases/" + pom_path + "/" + artifact_id
+    Path(full_path_string).mkdir(parents=True, exist_ok=True)
+
+    shutil.move(old_path, full_path_string)
+    print("Moved pom to parent folder: " + full_path_string)
 
 
 # find_parent_dirs_and_move_children("releases")
@@ -147,4 +160,4 @@ def create_new_pom_folder():
 #     crawl_nexus(nexus_url, 'releases')
 #     find_parent_dirs_and_move_children('releases')
 
-pom_parent_finder('pom.xml')
+pom_parent_finder('releases/netarchive/archive/pom.xml')
