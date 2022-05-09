@@ -28,7 +28,8 @@ def __get_prefix(string, delimiter):
 
 def __enforce_version(version):
     """Enforces a specific syntax for the version of a dependency.
-    The rule is that every version should have a suffix, middle, and a prefix. E.g. '1.0' will be '1.0.0', and '2.30' will be '2.30.0'.
+    The rule is that every version should have a suffix, middle, and a prefix separated by periods.
+    E.g. '1.0' will be '1.0.0' and '2.30' will be '2.30.0'.
     """
     splits = version.split(".")
     if len(splits) < 3:
