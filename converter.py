@@ -54,6 +54,8 @@ def __split_name_and_version(val):
         version = __get_prefix(val, ":")
         package = val[:-(len(version) + 1)]
 
+    # The enforce_version method will change the style of every version to be prefix.middle.suffix, e.g. 1.3.0, 2.3.1, etc.
+    # This method can be used if it for some reason is a problem to encode the versions as strings.
     return package, version  # __enforce_version(version)
 
 
@@ -127,7 +129,7 @@ def __create_csv_data():
 
 
 def create_csv(path_to_tgf, path_to_csv):
-    """Using the .tgf file at the given path, create a .csv file at the other give path."""
+    """Using the .tgf file at the given path, create a .csv file at the other given path."""
     __init_paths(path_to_tgf, path_to_csv)
     csv_data = __create_csv_data()
 
