@@ -1,8 +1,11 @@
+import logging
 import os
+import subprocess
+from collections import defaultdict
+from pathlib import Path
+
 import requests
 from bs4 import BeautifulSoup
-import logging
-from pathlib import Path
 
 logging.basicConfig(
     format='%(asctime)s %(levelname)s:%(message)s',
@@ -21,19 +24,17 @@ def get_links_at_url(url):
 
 
 def download_pom(url, destination_dir):
+    print(destination_dir)
     pom_content = get_html(url)
-    Path(destination_dir).mkdir(parents=True)  # exist_ok=True?
+    Path(destination_dir).mkdir(parents=True, exist_ok=True)  # exist_ok=True?
     with open(destination_dir + '/pom.xml', 'w+') as pom:
         pom.write(pom_content)
 
 
-visited = set()
-
-
-def get_newest_pom(repo_dir_url, destination_dir):
+def get_newest_pom(artifact_id_url, destination_dir):
     versions = []
 
-    for link_url in get_links_at_url(repo_dir_url):
+    for link_url in get_links_at_url(artifact_id_url):
         if link_url != '../' and link_url.endswith('/'):
             versions.append(link_url)
 
@@ -41,10 +42,16 @@ def get_newest_pom(repo_dir_url, destination_dir):
 
     for link_url in get_links_at_url(newest_version_url):
         if link_url.endswith('.pom'):  # Only 1 should exist so just grab that
-            print('downloading ' + link_url + ' to ' + destination_dir)
-            # download_pom(link_url, destination_dir)
+            # print('downloading ' + link_url + ' to ' + destination_dir)
+            if artifact_id_url.endswith('-parent'):
+                print('artifact: ' + destination_dir + ' parent: ', end='')
+                download_pom(link_url, os.path.dirname(destination_dir))
+            download_pom(link_url, destination_dir)
             # Pom-containing dir can contain .xml files and stuff, so doesn't hurt to skip checking them by breaking
             break
+
+
+visited = set()
 
 
 def crawl_nexus(url, path):
@@ -63,16 +70,59 @@ def crawl_nexus(url, path):
             # else:
             #    print('Ignoring ' + link_url)
         elif link_url.endswith('.pom'):
-            local_repo_dir = os.path.dirname(path)
+            local_artifact_dir = os.path.dirname(path)
 
             version_url = os.path.dirname(link_url)
-            repo_dir_url = os.path.dirname(version_url)
-            visited.add(repo_dir_url)
+            artifact_id_url = os.path.dirname(version_url)
+            visited.add(artifact_id_url)
 
-            get_newest_pom(repo_dir_url, local_repo_dir)
+            get_newest_pom(artifact_id_url, local_artifact_dir)
             # Again pom-containing dir contains other stuff, but we're done now, so break
             break
 
 
-crawl_nexus("https://sbforge.org/nexus/content/repositories/releases",
-            os.getcwd())  # Should use some configurable path instead of cwd
+# TODO skal lave kørslen af dependency:tree og downloaden af poms i to separate steps for simplicitetens skyld
+#  og for at fikse problem med parent-poms
+def run_dependency_tree(output_path):
+    command = ['mvn', 'dependency:tree', '-DoutputFile=' + output_path, '-DoutputType=tgf']
+    try:
+        process_output = subprocess.check_output(command)
+    except subprocess.CalledProcessError as e:
+        print('>>>>> ERROR <<<<<')
+        print(e.output)
+
+
+def find_parent_dirs_and_move_children(root_dir):
+    move_dict = defaultdict(list)
+
+    for root_path, dirs, files in os.walk(root_dir):
+        for dir_name in dirs:
+            parent_dir = os.path.basename(root_path)
+            if dir_name == parent_dir:
+                other_dirs = [d for d in dirs if d != dir_name]
+                for other_dir in other_dirs:
+                    parent_path = os.path.join(root_path, dir_name)
+                    child_path = os.path.join(root_path, other_dir)
+                    move_dict[parent_path].append(child_path)
+            elif dir_name.endswith('-parent'):
+                project_prefix = dir_name.replace('-parent', '')
+                other_dirs = [d for d in dirs if d != dir_name and d.startswith(project_prefix)]
+                for other_dir in other_dirs:
+                    parent_path = os.path.join(root_path, dir_name)
+                    child_path = os.path.join(root_path, other_dir)
+                    move_dict[parent_path].append(child_path)
+
+    for parent_path, child_paths in move_dict.items():
+        for child_path in child_paths:
+            child_basename = os.path.basename(child_path)
+            new_child_path = os.path.join(parent_path, child_basename)
+            # print('moving ' + child_path + ' to ' + new_child_path)
+            os.rename(child_path, new_child_path)
+
+
+# find_parent_dirs_and_move_children("releases")
+
+if __name__ == '__main__':
+    nexus_url = "https://sbforge.org/nexus/content/repositories/releases"
+    crawl_nexus(nexus_url, 'releases')
+    find_parent_dirs_and_move_children('releases')
