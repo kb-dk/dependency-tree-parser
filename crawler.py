@@ -8,6 +8,7 @@ from pathlib import Path
 
 import requests
 from bs4 import BeautifulSoup
+from configparser import ConfigParser
 
 logging.basicConfig(
     format='%(asctime)s %(levelname)s:%(message)s',
@@ -28,7 +29,7 @@ def get_links_at_url(url):
 def download_pom(url, destination_dir):
     print(destination_dir)
     pom_content = get_html(url)
-    Path(destination_dir).mkdir(parents=True, exist_ok=True)  # exist_ok=True?
+    Path(destination_dir).mkdir(parents=True, exist_ok=True)
     with open(destination_dir + '/pom.xml', 'w+') as pom:
         pom.write(pom_content)
 
@@ -83,8 +84,6 @@ def crawl_nexus(url, path):
             break
 
 
-# TODO skal lave kørslen af dependency:tree og downloaden af poms i to separate steps for simplicitetens skyld
-#  og for at fikse problem med parent-poms
 def run_dependency_tree(output_path):
     command = ['mvn', 'dependency:tree', '-DoutputFile=' + output_path, '-DoutputType=tgf']
     try:
@@ -128,12 +127,13 @@ def pom_parent_finder(path):
     tree = xml.ElementTree()
     tree.parse(path)
     artifact_id = tree.find("{%s}artifactId" % ns)
+    ignored_parents = ["sbforge-parent", "sbprojects-parent"]
 
     parent_artifact_id = None
     for elem in tree.getroot().findall("{%s}parent" % ns):
         parent_artifact_id = elem.find("{%s}artifactId" % ns)
 
-    if parent_artifact_id is None or (parent_artifact_id.text == "sbforge-parent" or parent_artifact_id.text == "sbprojects-parent"):
+    if parent_artifact_id is None or parent_artifact_id.text in ignored_parents:
         move_parent_pom(path, artifact_id)
 
 
@@ -156,8 +156,11 @@ def move_parent_pom(pom_path, artifact_id):
 # find_parent_dirs_and_move_children("releases")
 
 # if __name__ == '__main__':
-#     nexus_url = "https://sbforge.org/nexus/content/repositories/releases"
-#     crawl_nexus(nexus_url, 'releases')
+#     conf = ConfigParser()
+#     conf.read('config.conf')
+#     nexus_url = conf.get('crawl', 'base_url')
+#     output_dir = conf.get('crawl', 'output_dir')
+#     crawl_nexus(nexus_url, output_dir)
 #     find_parent_dirs_and_move_children('releases')
 
 pom_parent_finder('releases/netarchive/archive/pom.xml')
