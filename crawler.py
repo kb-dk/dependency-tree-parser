@@ -14,6 +14,13 @@ logging.basicConfig(
     format='%(asctime)s %(levelname)s:%(message)s',
     level=logging.INFO)
 
+config = ConfigParser()
+config.read("config.conf")
+NEXUS_RELEASES_BASE_URL = config.get("nexus_crawl", "releases_base_url")
+CRAWL_OUTPUT_DIR = config.get("nexus_crawl", "output_dir")
+DIR_TRAVERSAL_BASE_DIR = config.get("dir_traversal", "base_dir")
+DIR_TRAVERSAL_OUTPUT_DIR = config.get("dir_traversal", "output_dir")
+
 ns = "http://maven.apache.org/POM/4.0.0"
 xml.register_namespace('', ns)
 tree = xml.ElementTree()
@@ -41,7 +48,8 @@ def __download_pom(url, destination_dir):
     print(destination_dir)
     pom_content = __get_html(url)
     Path(destination_dir).mkdir(parents=True, exist_ok=True)
-    with open(destination_dir + '/pom.xml', 'w+') as pom:
+    pom_path = os.path.join(destination_dir, "pom.xml")
+    with open(pom_path, 'w+') as pom:
         pom.write(pom_content)
 
 
@@ -76,11 +84,12 @@ def __crawl_nexus(url, path):
 
         if link_url == '../':  # Don't go back
             continue
-        elif link_url.endswith('/'):  # and os.path.dirname(link_url) not in visited:
+        elif link_url.endswith('/'):
             parent_url = os.path.dirname(link_url[:-1])
             if parent_url not in visited:
                 # print(os.path.dirname(link_url), link_url)
-                new_path = path + '/' + os.path.basename(link_url[:-1])
+                current_link_dir = os.path.basename(link_url[:-1])
+                new_path = os.path.join(path, current_link_dir)
                 __crawl_nexus(link_url, new_path)
             # else:
             #    print('Ignoring ' + link_url)
@@ -126,9 +135,10 @@ def __move_parent_pom(pom_path, artifact_id):
     old_path = pom_path
     full_path_string = __create_pom_path(artifact_id, pom_path)
     Path(full_path_string).mkdir(parents=True, exist_ok=True)
+    new_path = os.path.join(full_path_string, "pom.xml")
 
-    shutil.move(old_path, full_path_string + "/pom.xml")
-    print("Moved pom to parent folder: " + full_path_string + "/pom.xml")
+    shutil.move(old_path, new_path)
+    print("Moved pom to parent folder: " + new_path)
 
 
 def __pom_child_finder(path):
@@ -146,12 +156,13 @@ def __pom_child_finder(path):
 
 def __move_child_pom(old_pom_path, parent_artifact_id, child_artifact_id):
     parent_path_string = __create_pom_path(parent_artifact_id, old_pom_path)
-    child_path_string = parent_path_string + "/" + child_artifact_id.text
+    child_path_string = os.path.join(parent_path_string, child_artifact_id.text)
 
     if Path(parent_path_string).exists():
         Path(child_path_string).mkdir(exist_ok=True)
-        shutil.move(old_pom_path, child_path_string + "/pom.xml")
-        print("Moved child pom to folder: " + child_path_string + "/pom.xml")
+        new_pom_path = os.path.join(child_path_string, "pom.xml")
+        shutil.move(old_pom_path, new_pom_path)
+        print("Moved child pom to folder: " + new_pom_path)
     else:
         print("Child move ignored: " + old_pom_path + " -> " + child_path_string + "/pom.xml")
 
@@ -161,12 +172,12 @@ def __create_pom_path(parent_artifact_id, pom_path):
     pom_path = pom_path.rsplit("/", 1)[0]
     pom_path = pom_path.split("releases/", 1)[-1]
     # artifact_id = parent_artifact_id.text.rsplit("-parent", 1)[0] + "-parent"
-    full_path_string = "new_releases/" + pom_path + "/" + parent_artifact_id.text
+    full_path_string = os.path.join(DIR_TRAVERSAL_OUTPUT_DIR, pom_path, parent_artifact_id.text)
     return full_path_string
 
 
 def __find_parents():
-    for root, dirs, files in os.walk('releases/'):
+    for root, dirs, files in os.walk(DIR_TRAVERSAL_BASE_DIR):
         if files and files[0] == "pom.xml":
             __pom_parent_finder(os.path.join(root, files[0]))
 
@@ -174,7 +185,7 @@ def __find_parents():
 def __find_children(children_left):
     files_skipped = 0
     if children_left:
-        for root, dirs, files in os.walk('releases/'):
+        for root, dirs, files in os.walk(DIR_TRAVERSAL_BASE_DIR):
             if files and files[0] == "pom.xml":
                 __pom_child_finder(os.path.join(root, files[0]))
                 if os.path.isfile(os.path.join(root, files[0])):
@@ -189,9 +200,8 @@ if __name__ == "__main__":
         print("Need arguments")
         sys.exit(1)
     if sys.argv[1] == "nexus":
-        Path("releases").mkdir(exist_ok=True)
-        nexus_url = "https://sbforge.org/nexus/content/repositories/releases"
-        __crawl_nexus(nexus_url, 'releases')
+        Path(CRAWL_OUTPUT_DIR).mkdir(exist_ok=True)
+        __crawl_nexus(NEXUS_RELEASES_BASE_URL, CRAWL_OUTPUT_DIR)
     if sys.argv[1] == "move":
         __find_parents()
         __find_children(True)
