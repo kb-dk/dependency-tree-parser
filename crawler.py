@@ -158,9 +158,10 @@ def move_parent_pom(pom_path, artifact_id):
 # if __name__ == '__main__':
 #     conf = ConfigParser()
 #     conf.read('config.conf')
-#     nexus_url = conf.get('crawl', 'base_url')
-#     output_dir = conf.get('crawl', 'output_dir')
+#     nexus_url = conf.get('nexus_crawl', 'base_url')
+#     output_dir = conf.get('nexus_crawl', 'output_dir')
 #     crawl_nexus(nexus_url, output_dir)
-#     find_parent_dirs_and_move_children('releases')
+#     base_dir = conf.get('dir_traversal', 'base_dir')
+#     find_parent_dirs_and_move_children(base_dir)
 
 pom_parent_finder('releases/netarchive/archive/pom.xml')
