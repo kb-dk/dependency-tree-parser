@@ -16,10 +16,12 @@ logging.basicConfig(
 
 
 def get_html(url):
+    """ Make a GET request to the url and return the html content. """
     return requests.get(url).text
 
 
 def get_links_at_url(url):
+    """ Generator returning links (href) from <a> tags at a given url one by one. """
     html = get_html(url)
     soup = BeautifulSoup(html, 'html.parser')
     for link_tag in soup.find_all('a'):
@@ -27,6 +29,9 @@ def get_links_at_url(url):
 
 
 def download_pom(url, destination_dir):
+    """ Downloads the pom content at the given url and writes it to pom.xml under the given destination directory.
+    The given url is expected to link directly to the content of a pom file, i.e.
+    https://example-nexus.com/org/project/artifact-id/1.0.0/artifact_id-1.0.0.pom """
     print(destination_dir)
     pom_content = get_html(url)
     Path(destination_dir).mkdir(parents=True, exist_ok=True)
@@ -35,6 +40,8 @@ def download_pom(url, destination_dir):
 
 
 def get_newest_pom(artifact_id_url, destination_dir):
+    """ Given a nexus url at the artifact ID level, i.e. https://example-nexus.com/org/project/artifact-id,
+    downloads the project's newest version pom to the specified destination dir. """
     versions = []
 
     for link_url in get_links_at_url(artifact_id_url):
@@ -58,6 +65,8 @@ visited = set()
 
 
 def crawl_nexus(url, path):
+    """ Recursively crawls nexus from the given url, building an equivalent folder structure to nexus from
+    the provided path and downloading pom files to their respective project folders. """
     # logging.info(f'Crawling: {url}')
     for link_url in get_links_at_url(url):
         # Need to check if folder contains version numbers and then just check latest.
@@ -85,9 +94,11 @@ def crawl_nexus(url, path):
 
 
 def run_dependency_tree(output_path):
+    """ Runs 'mvn dependency:tree' in the current working directory
+    and outputs the resulting tgf-file at the provided output path. """
     command = ['mvn', 'dependency:tree', '-DoutputFile=' + output_path, '-DoutputType=tgf']
     try:
-        process_output = subprocess.check_output(command)
+        subprocess.check_output(command)
     except subprocess.CalledProcessError as e:
         print('>>>>> ERROR <<<<<')
         print(e.output)
