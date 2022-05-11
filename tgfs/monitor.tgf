@@ -1,0 +1,6 @@
+1510129635 org.netarchivesuite:monitor:pom:7.3
+92621336 junit:junit:jar:4.11:test
+223696575 org.hamcrest:hamcrest-core:jar:1.3:test
+#
+92621336 223696575 test
+1510129635 92621336 test

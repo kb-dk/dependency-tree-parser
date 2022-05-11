@@ -1,0 +1,24 @@
+165631567 vhs-ingest-monitor:vhs-ingest-monitor-cronjob:jar:0.1
+1902094533 dk.statsbiblioteket.medieplatform:workflow-state-monitor-model:jar:0.8:compile
+1248908034 com.sun.jersey:jersey-bundle:jar:1.11:compile
+2144965699 javax.ws.rs:jsr311-api:jar:1.1.1:compile
+102946788 org.slf4j:slf4j-api:jar:1.7.2:compile
+1782561969 javax.mail:mail:jar:1.4.1:compile
+639343159 javax.activation:activation:jar:1.1:compile
+366180667 org.hamcrest:hamcrest-all:jar:1.3:test
+90050962 junit:junit:jar:4.9:test
+303300540 org.hamcrest:hamcrest-core:jar:1.1:test
+1755514347 ch.qos.logback:logback-classic:jar:1.0.9:runtime
+1714922341 ch.qos.logback:logback-core:jar:1.0.9:runtime
+#
+165631567 1902094533 compile
+1248908034 2144965699 compile
+165631567 1248908034 compile
+165631567 102946788 compile
+1782561969 639343159 compile
+165631567 1782561969 compile
+165631567 366180667 test
+90050962 303300540 test
+165631567 90050962 test
+1755514347 1714922341 runtime
+165631567 1755514347 runtime

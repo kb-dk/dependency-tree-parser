@@ -1,7 +1,6 @@
 import logging
 import os
 import shutil
-import subprocess
 import sys
 import xml.etree.ElementTree as xml
 from pathlib import Path
@@ -12,6 +11,8 @@ from bs4 import BeautifulSoup
 logging.basicConfig(
     format='%(asctime)s %(levelname)s:%(message)s',
     level=logging.INFO)
+
+ignored_parents = ["sbforge-parent", "sbprojects-parent", "oss-parent"]
 
 ns = "http://maven.apache.org/POM/4.0.0"
 xml.register_namespace('', ns)
@@ -50,10 +51,6 @@ def __get_newest_pom(artifact_id_url, destination_dir):
 
     for link_url in __get_links_at_url(newest_version_url):
         if link_url.endswith('.pom'):  # Only 1 should exist so just grab that
-            # print('downloading ' + link_url + ' to ' + destination_dir)
-            if artifact_id_url.endswith('-parent'):
-                print('artifact: ' + destination_dir + ' parent: ', end='')
-                __download_pom(link_url, os.path.dirname(destination_dir))
             __download_pom(link_url, destination_dir)
             # Pom-containing dir can contain .xml files and stuff, so doesn't hurt to skip checking them by breaking
             break
@@ -86,25 +83,15 @@ def __crawl_nexus(url, path):
             break
 
 
-def __run_dependency_tree(output_path):
-    command = ['mvn', 'dependency:tree', '-DoutputFile=' + output_path, '-DoutputType=tgf']
-    try:
-        process_output = subprocess.check_output(command)
-    except subprocess.CalledProcessError as e:
-        print('>>>>> ERROR <<<<<')
-        print(e.output)
-
-
 def __pom_parent_finder(path):
     tree.parse(path)
     artifact_id = tree.find("{%s}artifactId" % ns)
-    ignored_parents = ["sbforge-parent", "sbprojects-parent"]
 
     parent_artifact_id = None
     for elem in tree.getroot().findall("{%s}parent" % ns):
         parent_artifact_id = elem.find("{%s}artifactId" % ns)
 
-    if parent_artifact_id is None or parent_artifact_id.text in ignored_parents:
+    if parent_artifact_id is None or (parent_artifact_id.text.lower() in ignored_parents):
         __move_parent_pom(path, artifact_id)
 
 
@@ -116,7 +103,7 @@ def __move_parent_pom(pom_path, artifact_id):
     Path(full_path_string).mkdir(parents=True, exist_ok=True)
 
     shutil.move(old_path, full_path_string + "/pom.xml")
-    print("Moved pom to parent folder: " + full_path_string + "/pom.xml")
+    print("Moved parent pom from: " + old_path + " to " + full_path_string + "/pom.xml")
 
 
 def __pom_child_finder(path):
@@ -127,21 +114,56 @@ def __pom_child_finder(path):
     for elem in tree.getroot().findall("{%s}parent" % ns):
         parent_artifact_id = elem.find("{%s}artifactId" % ns)
 
-    if parent_artifact_id is not None and not (
-            parent_artifact_id.text == "sbforge-parent" or parent_artifact_id.text == "sbprojects-parent"):
-        __move_child_pom(path, parent_artifact_id, artifact_id)
+    if parent_artifact_id is not None and parent_artifact_id.text not in ignored_parents:
+        __find_and_move_to_closest_parent_folder(path, artifact_id.text.lower(), parent_artifact_id.text.lower())
 
 
-def __move_child_pom(old_pom_path, parent_artifact_id, child_artifact_id):
-    parent_path_string = __create_pom_path(parent_artifact_id, old_pom_path)
-    child_path_string = parent_path_string + "/" + child_artifact_id.text
+def __find_and_move_to_closest_parent_folder(old_child_path, child_id, parent_id):
+    path = old_child_path.strip("/pom.xml")
+    path = path.split("releases/", 1)[-1]
+    splits = len(path.split("/"))
 
-    if Path(parent_path_string).exists():
-        Path(child_path_string).mkdir(exist_ok=True)
-        shutil.move(old_pom_path, child_path_string + "/pom.xml")
-        print("Moved child pom to folder: " + child_path_string + "/pom.xml")
+    child_moved = False
+    path_to_try = "new_releases/" + path.rsplit("/", 1)[0]
+    for i in range(splits):
+        for root, subdir, files in os.walk(path_to_try):
+            if child_moved:
+                break
+            for s in subdir:
+                if s == parent_id:
+                    # For Debugging: print(str(i) + " | Found: " + s + " - Wanted: " + parent_id)
+                    parent_path = os.path.join(root, s)
+                    if not __try_moving_pom(child_id, old_child_path, os.path.join(parent_path, s)) and not __try_moving_pom(child_id,
+                                                                                                                             old_child_path,
+                                                                                                                             parent_path):
+                        print("Child move ignored: " + old_child_path + " -> " + path_to_try + "/pom.xml")
+                    else:
+                        child_moved = True
+                if child_moved:
+                    break
+
+
+# for i in range(splits):
+#     path_to_try = path.rsplit("/", 1)[0] + "/" + parent_id
+#     if not __try_moving_pom(child_id, old_child_path, path_to_try):
+#         path = path.rsplit("/", 1)[0]
+#         print("     Tried: " + path_to_try + " | expected: " + parent_id + "  |  for: " + old_child_path)
+#         if i == (splits - 1):
+#             print("Child move ignored: " + old_child_path + " -> " + path_to_try + "/pom.xml")
+#     else:
+#         break
+
+
+def __try_moving_pom(child_id, old_child_path, path):
+    parent_path = Path(path)
+    new_child_path = os.path.join(path, child_id)
+    if parent_path.exists():
+        Path(new_child_path).mkdir(exist_ok=False)
+        shutil.move(old_child_path, new_child_path + "/pom.xml")
+        print("Moved child pom to folder: " + new_child_path + "/pom.xml")
+        return True
     else:
-        print("Child move ignored: " + old_pom_path + " -> " + child_path_string + "/pom.xml")
+        return False
 
 
 def __create_pom_path(parent_artifact_id, pom_path):
@@ -149,7 +171,7 @@ def __create_pom_path(parent_artifact_id, pom_path):
     pom_path = pom_path.rsplit("/", 1)[0]
     pom_path = pom_path.split("releases/", 1)[-1]
     # artifact_id = parent_artifact_id.text.rsplit("-parent", 1)[0] + "-parent"
-    full_path_string = "new_releases/" + pom_path + "/" + parent_artifact_id.text
+    full_path_string = "new_releases/" + pom_path + "/" + parent_artifact_id.text.lower()
     return full_path_string
 
 
@@ -176,10 +198,11 @@ if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Need arguments")
         sys.exit(1)
-    if sys.argv[1] == "nexus":
+    if sys.argv[1] == "download":
         Path("releases").mkdir(exist_ok=True)
         nexus_url = "https://sbforge.org/nexus/content/repositories/releases"
         __crawl_nexus(nexus_url, 'releases')
     if sys.argv[1] == "move":
-        __find_parents()
-        __find_children(True)
+        sys.exit(0)
+        # __find_parents()
+        # __find_children(True)

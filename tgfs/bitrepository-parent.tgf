@@ -1,0 +1,36 @@
+1684580278 org.bitrepository.reference:bitrepository-parent:pom:1.9
+1298707825 org.slf4j:slf4j-api:jar:1.7.21:compile
+1647509467 ch.qos.logback:logback-classic:jar:1.1.7:compile
+856432481 ch.qos.logback:logback-core:jar:1.1.7:compile
+936546050 org.jvnet.jaxb2_commons:jaxb2-basics-runtime:jar:0.11.1:compile
+368040556 org.testng:testng:jar:6.9.10:test
+1616257837 com.beust:jcommander:jar:1.48:test
+871554897 org.beanshell:bsh:jar:2.0b4:test
+276561074 org.mockito:mockito-core:jar:1.9.5:test
+2074896491 org.hamcrest:hamcrest-core:jar:1.1:test
+716333944 org.objenesis:objenesis:jar:1.0:test
+262093096 org.slf4j:jul-to-slf4j:jar:1.7.21:compile
+1078905349 org.slf4j:log4j-over-slf4j:jar:1.7.21:compile
+1488526679 org.slf4j:jcl-over-slf4j:jar:1.7.21:compile
+1638472859 org.jaccept:jaccept-core:jar:0.4:test
+386478079 org.jentity:jentity-core:jar:0.3:test
+555864569 commons-lang:commons-lang:jar:2.6:test
+836903727 log4j:log4j:jar:1.2.17:test
+#
+1684580278 1298707825 compile
+1647509467 856432481 compile
+1684580278 1647509467 compile
+1684580278 936546050 compile
+368040556 1616257837 test
+368040556 871554897 test
+1684580278 368040556 test
+276561074 2074896491 test
+276561074 716333944 test
+1684580278 276561074 test
+1684580278 262093096 compile
+1684580278 1078905349 compile
+1684580278 1488526679 compile
+386478079 555864569 test
+1638472859 386478079 test
+1638472859 836903727 test
+1684580278 1638472859 test

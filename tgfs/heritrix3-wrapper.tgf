@@ -1,0 +1,36 @@
+332405156 org.netarchivesuite:heritrix3-wrapper:jar:1.0.4
+433756475 org.apache.httpcomponents:httpclient:jar:4.3.6:compile
+864078397 org.apache.httpcomponents:httpcore:jar:4.3.3:compile
+1947681232 commons-logging:commons-logging:jar:1.1.3:compile
+1604271704 commons-codec:commons-codec:jar:1.6:compile
+1008294188 org.apache.commons:commons-compress:jar:1.9:compile
+1625413756 org.slf4j:slf4j-api:jar:1.7.7:compile
+783682673 org.slf4j:jul-to-slf4j:jar:1.7.7:test
+142449153 org.slf4j:log4j-over-slf4j:jar:1.7.7:test
+2119918107 org.slf4j:jcl-over-slf4j:jar:1.7.7:test
+269973396 ch.qos.logback:logback-core:jar:1.1.2:test
+240919651 ch.qos.logback:logback-classic:jar:1.1.2:test
+1788152379 javax.xml.bind:jaxb-api:jar:2.2.11:compile
+1333520072 com.sun.xml.bind:jaxb-impl:jar:2.2.11:compile
+1685820260 com.sun.xml.bind:jaxb-core:jar:2.2.11:compile
+191614132 com.sun.activation:javax.activation:jar:1.2.0:compile
+1240320816 junit:junit:jar:4.12:test
+1496332643 org.hamcrest:hamcrest-core:jar:1.3:test
+#
+433756475 864078397 compile
+433756475 1947681232 compile
+433756475 1604271704 compile
+332405156 433756475 compile
+332405156 1008294188 compile
+332405156 1625413756 compile
+332405156 783682673 test
+332405156 142449153 test
+332405156 2119918107 test
+332405156 269973396 test
+332405156 240919651 test
+332405156 1788152379 compile
+332405156 1333520072 compile
+332405156 1685820260 compile
+332405156 191614132 compile
+1240320816 1496332643 test
+332405156 1240320816 test

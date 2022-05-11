@@ -1,0 +1,102 @@
+1625037390 org.bitrepository.reference:bitrepository-reference-pillar:jar:1.9
+939693702 org.bitrepository.reference:bitrepository-core:jar:1.9:compile
+2107393518 org.bitrepository.reference:bitrepository-reference-settings:jar:1.9:compile
+1561480489 org.bitrepository.repository-settings:bitrepository-repository-settings-xsd:jar:12:compile
+1015552283 org.bitrepository.repository-settings:bitrepository-repository-settings-java:jar:12:compile
+1955991197 org.bitrepository:bitrepository-message-xml-xsd:jar:30:compile
+1073862849 org.bitrepository:bitrepository-message-xml-java:jar:30:compile
+263565037 commons-lang:commons-lang:jar:2.6:compile
+1938374337 commons-io:commons-io:jar:2.4:compile
+934225099 org.apache.httpcomponents:httpclient:jar:4.5.1:compile
+2032547119 org.apache.httpcomponents:httpcore:jar:4.4.3:compile
+1539718688 commons-logging:commons-logging:jar:1.2:compile
+1627618479 org.bouncycastle:bcprov-jdk15on:jar:1.54:compile
+801412408 org.bouncycastle:bcmail-jdk15on:jar:1.54:compile
+1728266914 org.bouncycastle:bcpkix-jdk15on:jar:1.54:compile
+224286556 org.apache.activemq:activemq-client:jar:5.13.3:compile
+2000856156 org.apache.geronimo.specs:geronimo-jms_1.1_spec:jar:1.1.1:compile
+2091160281 org.fusesource.hawtbuf:hawtbuf:jar:1.11:compile
+22006205 org.apache.geronimo.specs:geronimo-j2ee-management_1.1_spec:jar:1.0.1:compile
+2127862399 commons-codec:commons-codec:jar:1.9:compile
+483832253 org.bitrepository.reference:bitrepository-service:jar:1.9:compile
+1144838820 org.apache.derby:derby:jar:10.12.1.1:compile
+994173375 org.apache.derby:derbyclient:jar:10.12.1.1:compile
+1637651402 org.apache.derby:derbynet:jar:10.12.1.1:compile
+1215208733 org.apache.derby:derbytools:jar:10.12.1.1:compile
+1789237070 org.postgresql:postgresql:jar:9.4.1211:compile
+1583210428 com.mchange:c3p0:jar:0.9.5.2:compile
+1541019006 com.mchange:mchange-commons-java:jar:0.2.11:compile
+1742798189 org.bitrepository.reference:bitrepository-core:test-jar:tests:1.9:test
+557386040 org.bitrepository.reference:bitrepository-service:test-jar:tests:1.9:test
+287933084 org.bitrepository.reference:bitrepository-client:jar:1.9:test
+441652258 commons-cli:commons-cli:jar:1.3.1:test
+2050525584 org.bitrepository.reference:bitrepository-client:test-jar:tests:1.9:test
+320945958 org.apache.activemq:activemq-broker:jar:5.13.3:test
+1312907964 org.apache.activemq:activemq-openwire-legacy:jar:5.13.3:test
+1278319954 org.slf4j:slf4j-api:jar:1.7.21:compile
+1929115981 ch.qos.logback:logback-classic:jar:1.1.7:compile
+1748574267 ch.qos.logback:logback-core:jar:1.1.7:compile
+757660418 org.jvnet.jaxb2_commons:jaxb2-basics-runtime:jar:0.11.1:compile
+1840457976 org.testng:testng:jar:6.9.10:test
+1076856210 com.beust:jcommander:jar:1.48:test
+1639341396 org.beanshell:bsh:jar:2.0b4:test
+187452043 org.mockito:mockito-core:jar:1.9.5:test
+2133612542 org.hamcrest:hamcrest-core:jar:1.1:test
+1133731484 org.objenesis:objenesis:jar:1.0:test
+270333767 org.slf4j:jul-to-slf4j:jar:1.7.21:compile
+2030931933 org.slf4j:log4j-over-slf4j:jar:1.7.21:compile
+1677960357 org.slf4j:jcl-over-slf4j:jar:1.7.21:compile
+1035825415 org.jaccept:jaccept-core:jar:0.4:test
+1248595768 org.jentity:jentity-core:jar:0.3:test
+1602880207 log4j:log4j:jar:1.2.17:test
+#
+939693702 2107393518 compile
+939693702 1561480489 compile
+939693702 1015552283 compile
+939693702 1955991197 compile
+939693702 1073862849 compile
+939693702 263565037 compile
+939693702 1938374337 compile
+934225099 2032547119 compile
+934225099 1539718688 compile
+939693702 934225099 compile
+939693702 1627618479 compile
+801412408 1728266914 compile
+939693702 801412408 compile
+224286556 2000856156 compile
+224286556 2091160281 compile
+224286556 22006205 compile
+939693702 224286556 compile
+939693702 2127862399 compile
+1625037390 939693702 compile
+483832253 1144838820 compile
+483832253 994173375 compile
+483832253 1637651402 compile
+483832253 1215208733 compile
+483832253 1789237070 compile
+1583210428 1541019006 compile
+483832253 1583210428 compile
+1625037390 483832253 compile
+1625037390 1742798189 test
+1625037390 557386040 test
+287933084 441652258 test
+1625037390 287933084 test
+1625037390 2050525584 test
+320945958 1312907964 test
+1625037390 320945958 test
+1625037390 1278319954 compile
+1929115981 1748574267 compile
+1625037390 1929115981 compile
+1625037390 757660418 compile
+1840457976 1076856210 test
+1840457976 1639341396 test
+1625037390 1840457976 test
+187452043 2133612542 test
+187452043 1133731484 test
+1625037390 187452043 test
+1625037390 270333767 compile
+1625037390 2030931933 compile
+1625037390 1677960357 compile
+1035825415 1248595768 test
+1035825415 1602880207 test
+1625037390 1035825415 test

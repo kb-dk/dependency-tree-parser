@@ -1,0 +1,150 @@
+1301763240 org.bitrepository.reference:bitrepository-monitoring-service:war:1.9
+1387556178 org.bitrepository.reference:bitrepository-core:jar:1.9:compile
+1931977799 org.bitrepository.reference:bitrepository-reference-settings:jar:1.9:compile
+372261610 org.bitrepository.repository-settings:bitrepository-repository-settings-xsd:jar:12:compile
+298862004 org.bitrepository.repository-settings:bitrepository-repository-settings-java:jar:12:compile
+532613259 org.bitrepository:bitrepository-message-xml-xsd:jar:30:compile
+423870962 org.bitrepository:bitrepository-message-xml-java:jar:30:compile
+225507106 commons-lang:commons-lang:jar:2.6:compile
+505343709 commons-io:commons-io:jar:2.4:compile
+2038585029 org.apache.httpcomponents:httpclient:jar:4.5.1:compile
+2127123542 org.apache.httpcomponents:httpcore:jar:4.4.3:compile
+1955226954 commons-logging:commons-logging:jar:1.2:compile
+495650048 org.bouncycastle:bcprov-jdk15on:jar:1.54:compile
+1985235978 org.bouncycastle:bcmail-jdk15on:jar:1.54:compile
+1116462450 org.bouncycastle:bcpkix-jdk15on:jar:1.54:compile
+1695301724 org.apache.activemq:activemq-client:jar:5.13.3:compile
+552266488 org.apache.geronimo.specs:geronimo-jms_1.1_spec:jar:1.1.1:compile
+1955251955 org.fusesource.hawtbuf:hawtbuf:jar:1.11:compile
+1761011037 org.apache.geronimo.specs:geronimo-j2ee-management_1.1_spec:jar:1.0.1:compile
+1879000767 commons-codec:commons-codec:jar:1.9:compile
+406183058 org.bitrepository.reference:bitrepository-service:jar:1.9:compile
+984235065 org.apache.derby:derby:jar:10.12.1.1:compile
+1705634364 org.apache.derby:derbyclient:jar:10.12.1.1:compile
+1895203464 org.apache.derby:derbynet:jar:10.12.1.1:compile
+1183912264 org.apache.derby:derbytools:jar:10.12.1.1:compile
+766621271 org.postgresql:postgresql:jar:9.4.1211:compile
+132338135 com.mchange:c3p0:jar:0.9.5.2:compile
+1137013089 com.mchange:mchange-commons-java:jar:0.2.11:compile
+227549952 org.bitrepository.reference:bitrepository-client:jar:1.9:compile
+766722027 commons-cli:commons-cli:jar:1.3.1:compile
+818130531 org.glassfish.jersey.core:jersey-server:jar:2.15:compile
+1483050851 org.glassfish.jersey.core:jersey-common:jar:2.15:compile
+1424043852 org.glassfish.jersey.bundles.repackaged:jersey-guava:jar:2.15:compile
+1620643420 org.glassfish.hk2:osgi-resource-locator:jar:1.0.1:compile
+1300497562 org.glassfish.jersey.core:jersey-client:jar:2.15:compile
+971936990 javax.annotation:javax.annotation-api:jar:1.2:compile
+1680365536 org.glassfish.hk2:hk2-api:jar:2.4.0-b06:compile
+1282100951 org.glassfish.hk2:hk2-utils:jar:2.4.0-b06:compile
+556151572 org.glassfish.hk2.external:aopalliance-repackaged:jar:2.4.0-b06:compile
+1822624650 org.glassfish.hk2.external:javax.inject:jar:2.4.0-b06:compile
+1251133097 org.glassfish.hk2:hk2-locator:jar:2.4.0-b06:compile
+1553544410 org.javassist:javassist:jar:3.18.1-GA:compile
+1287062222 javax.validation:validation-api:jar:1.1.0.Final:compile
+943501193 org.glassfish.jersey.containers:jersey-container-servlet:jar:2.15:compile
+1690796457 org.glassfish.jersey.containers:jersey-container-servlet-core:jar:2.15:compile
+1911379471 org.glassfish.jersey.media:jersey-media-json-jackson:jar:2.15:compile
+95980430 com.fasterxml.jackson.jaxrs:jackson-jaxrs-base:jar:2.3.2:compile
+1478835287 com.fasterxml.jackson.core:jackson-core:jar:2.3.2:compile
+12006451 com.fasterxml.jackson.core:jackson-databind:jar:2.3.2:compile
+468797188 com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:jar:2.3.2:compile
+1515477775 com.fasterxml.jackson.module:jackson-module-jaxb-annotations:jar:2.3.2:compile
+736236438 com.fasterxml.jackson.core:jackson-annotations:jar:2.3.2:compile
+307080309 javax.ws.rs:javax.ws.rs-api:jar:2.0.1:compile
+51712095 javax:javaee-web-api:jar:7.0:provided
+2070003473 javax.servlet:javax.servlet-api:jar:3.1.0:provided
+1076133192 org.bitrepository.reference:bitrepository-core:test-jar:tests:1.9:test
+1073041213 org.bitrepository.reference:bitrepository-service:test-jar:tests:1.9:test
+348731252 org.apache.activemq:activemq-broker:jar:5.13.3:test
+1655081931 org.apache.activemq:activemq-openwire-legacy:jar:5.13.3:test
+25916650 org.slf4j:slf4j-api:jar:1.7.21:compile
+345132865 ch.qos.logback:logback-classic:jar:1.1.7:compile
+1228777520 ch.qos.logback:logback-core:jar:1.1.7:compile
+529766927 org.jvnet.jaxb2_commons:jaxb2-basics-runtime:jar:0.11.1:compile
+1164280115 org.testng:testng:jar:6.9.10:test
+1124804249 com.beust:jcommander:jar:1.48:test
+1733520096 org.beanshell:bsh:jar:2.0b4:test
+1679022055 org.mockito:mockito-core:jar:1.9.5:test
+219594319 org.hamcrest:hamcrest-core:jar:1.1:test
+397639322 org.objenesis:objenesis:jar:1.0:test
+1808470758 org.slf4j:jul-to-slf4j:jar:1.7.21:compile
+287136919 org.slf4j:log4j-over-slf4j:jar:1.7.21:compile
+700546109 org.slf4j:jcl-over-slf4j:jar:1.7.21:compile
+621449265 org.jaccept:jaccept-core:jar:0.4:test
+375781972 org.jentity:jentity-core:jar:0.3:test
+1835529707 log4j:log4j:jar:1.2.17:test
+#
+1387556178 1931977799 compile
+1387556178 372261610 compile
+1387556178 298862004 compile
+1387556178 532613259 compile
+1387556178 423870962 compile
+1387556178 225507106 compile
+1387556178 505343709 compile
+2038585029 2127123542 compile
+2038585029 1955226954 compile
+1387556178 2038585029 compile
+1387556178 495650048 compile
+1985235978 1116462450 compile
+1387556178 1985235978 compile
+1695301724 552266488 compile
+1695301724 1955251955 compile
+1695301724 1761011037 compile
+1387556178 1695301724 compile
+1387556178 1879000767 compile
+1301763240 1387556178 compile
+406183058 984235065 compile
+406183058 1705634364 compile
+406183058 1895203464 compile
+406183058 1183912264 compile
+406183058 766621271 compile
+132338135 1137013089 compile
+406183058 132338135 compile
+1301763240 406183058 compile
+227549952 766722027 compile
+1301763240 227549952 compile
+1483050851 1424043852 compile
+1483050851 1620643420 compile
+818130531 1483050851 compile
+818130531 1300497562 compile
+818130531 971936990 compile
+1680365536 1282100951 compile
+1680365536 556151572 compile
+818130531 1680365536 compile
+818130531 1822624650 compile
+1251133097 1553544410 compile
+818130531 1251133097 compile
+818130531 1287062222 compile
+1301763240 818130531 compile
+943501193 1690796457 compile
+1301763240 943501193 compile
+95980430 1478835287 compile
+95980430 12006451 compile
+1911379471 95980430 compile
+468797188 1515477775 compile
+1911379471 468797188 compile
+1911379471 736236438 compile
+1301763240 1911379471 compile
+1301763240 307080309 compile
+1301763240 51712095 provided
+1301763240 2070003473 provided
+1301763240 1076133192 test
+1301763240 1073041213 test
+348731252 1655081931 test
+1301763240 348731252 test
+1301763240 25916650 compile
+345132865 1228777520 compile
+1301763240 345132865 compile
+1301763240 529766927 compile
+1164280115 1124804249 test
+1164280115 1733520096 test
+1301763240 1164280115 test
+1679022055 219594319 test
+1679022055 397639322 test
+1301763240 1679022055 test
+1301763240 1808470758 compile
+1301763240 287136919 compile
+1301763240 700546109 compile
+621449265 375781972 test
+621449265 1835529707 test
+1301763240 621449265 test

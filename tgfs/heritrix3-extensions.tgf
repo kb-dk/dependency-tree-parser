@@ -1,0 +1,676 @@
+1750040348 org.netarchivesuite:heritrix3-extensions:jar:7.3
+1391532202 org.netarchivesuite:common-core:jar:7.3:compile
+835522298 com.sun.jersey:jersey-server:jar:1.19:compile
+848564270 com.sun.jersey:jersey-core:jar:1.19:compile
+1516876751 javax.ws.rs:jsr311-api:jar:1.1.1:compile
+1543760718 org.bitrepository.reference:bitrepository-core:jar:1.10-SNAPSHOT:compile
+1645805674 org.bitrepository.reference:bitrepository-reference-settings:jar:1.10-SNAPSHOT:compile
+511929069 org.bitrepository.repository-settings:bitrepository-repository-settings-xsd:jar:13:compile
+1271141733 org.bitrepository.repository-settings:bitrepository-repository-settings-java:jar:13:compile
+148823752 org.bitrepository:bitrepository-message-xml-xsd:jar:31:compile
+577672681 org.bitrepository:bitrepository-message-xml-java:jar:31:compile
+666851147 org.apache.httpcomponents:httpclient:jar:4.5.12:compile
+1287328228 org.bouncycastle:bcprov-jdk15on:jar:1.70:compile
+846052901 org.bouncycastle:bcmail-jdk15on:jar:1.70:compile
+1685759068 org.bouncycastle:bcutil-jdk15on:jar:1.70:compile
+958575255 org.bouncycastle:bcpkix-jdk15on:jar:1.70:compile
+755146854 org.apache.activemq:activemq-client:jar:5.16.4:compile
+1925300085 org.apache.geronimo.specs:geronimo-jms_1.1_spec:jar:1.1.1:compile
+1135131957 org.fusesource.hawtbuf:hawtbuf:jar:1.11:compile
+1873943005 org.apache.geronimo.specs:geronimo-j2ee-management_1.1_spec:jar:1.0.1:compile
+1460372957 org.jetbrains:annotations:jar:23.0.0:compile
+684634718 org.jvnet.jaxb2_commons:jaxb2-basics-runtime:jar:0.11.1:compile
+772399975 jakarta.xml.bind:jakarta.xml.bind-api:jar:2.3.3:compile
+1368030090 jakarta.activation:jakarta.activation-api:jar:1.2.2:compile
+1512323339 org.bitrepository.reference:bitrepository-client:jar:1.10-SNAPSHOT:compile
+119880787 org.apache.tomcat.embed:tomcat-embed-core:jar:8.5.50:compile
+1725359371 org.apache.tomcat:tomcat-annotations-api:jar:8.5.50:compile
+1686279280 org.apache.tomcat.embed:tomcat-embed-logging-juli:jar:8.5.2:compile
+529864074 org.apache.tomcat.embed:tomcat-embed-jasper:jar:8.5.50:compile
+838624655 org.apache.tomcat.embed:tomcat-embed-el:jar:8.5.50:compile
+1624449030 org.eclipse.jdt:ecj:jar:3.12.3:compile
+276957560 org.apache.tomcat:tomcat-jasper:jar:8.5.50:compile
+663512999 org.apache.tomcat:tomcat-servlet-api:jar:8.5.50:compile
+1972289220 org.apache.tomcat:tomcat-juli:jar:8.5.50:compile
+203715427 org.apache.tomcat:tomcat-el-api:jar:8.5.50:compile
+208499286 org.apache.tomcat:tomcat-api:jar:8.5.50:compile
+1209568547 org.apache.tomcat:tomcat-util-scan:jar:8.5.50:compile
+1214276218 org.apache.tomcat:tomcat-util:jar:8.5.50:compile
+1743830910 org.apache.tomcat:tomcat-jasper-el:jar:8.5.50:compile
+15240724 org.apache.tomcat:tomcat-jsp-api:jar:8.5.50:compile
+202734271 org.slf4j:slf4j-api:jar:1.7.25:compile
+1194179317 org.slf4j:jul-to-slf4j:jar:1.7.25:compile
+633665057 org.slf4j:log4j-over-slf4j:jar:1.7.25:compile
+1637373091 org.slf4j:jcl-over-slf4j:jar:1.7.25:compile
+1191123629 ch.qos.logback:logback-classic:jar:1.2.3:compile
+1815079573 ch.qos.logback:logback-core:jar:1.2.3:compile
+1859681487 jaxen:jaxen:jar:1.1.6:compile
+1296433403 org.apache.httpcomponents:httpcore:jar:4.4.1:compile
+1934770572 xalan:xalan:jar:2.7.1:compile
+1622828593 xalan:serializer:jar:2.7.1:compile
+1294553325 xml-apis:xml-apis:jar:1.4.01:compile
+815124587 commons-io:commons-io:jar:2.4:compile
+1370139092 commons-net:commons-net:jar:3.0.1:compile
+1653786174 commons-codec:commons-codec:jar:1.9:compile
+1706773689 org.mortbay.jetty:jetty:jar:6.1.26:compile
+2066996973 org.mortbay.jetty:jetty-util:jar:6.1.26:compile
+2144545878 org.mortbay.jetty:jetty-sslengine:jar:6.1.26:compile
+184854180 org.mortbay.jetty:jetty-ajp:jar:6.1.26:compile
+879095289 org.mortbay.jetty:servlet-api:jar:2.5-20081211:compile
+1371838766 org.mortbay.jetty:jsp-2.1-glassfish:jar:2.1.v20091210:compile
+924040924 ant:ant:jar:1.6.5:compile
+428609308 org.mortbay.jetty:jsp-2.1-jetty:jar:6.1.26:compile
+43856881 org.mortbay.jetty:jsp-api-2.1-glassfish:jar:2.1.v20091210:compile
+2011547493 commons-fileupload:commons-fileupload:jar:1.3.3:compile
+1571447323 org.eclipse.jdt.core.compiler:ecj:jar:4.4.2:compile
+614953565 javax.mail:mail:jar:1.4:compile
+1338957699 javax.activation:activation:jar:1.1:compile
+382334960 com.sun.messaging.mq:jms:jar:4.4.1:compile
+410908040 com.sun.messaging.mq:imq:jar:4.4.1:compile
+131553600 org.jwat:jwat-common:jar:1.0.4:compile
+1046265086 org.jwat:jwat-arc:jar:1.0.4:compile
+1735637682 org.jwat:jwat-archive-common:jar:1.0.4:compile
+274059873 org.jwat:jwat-gzip:jar:1.0.4:compile
+762676338 org.jwat:jwat-warc:jar:1.0.4:compile
+1981113966 berkeleydb:je:jar:3.2.76:compile
+206169140 fastutil:fastutil:jar:5.0.4:compile
+850520326 org.archive.heritrix:heritrix-commons:jar:3.4.0-NAS-7.3:compile
+870759734 org.apache.httpcomponents:httpmime:jar:4.5.13:compile
+1847434034 commons-collections:commons-collections:jar:3.1:compile
+766950017 net.htmlparser.jericho:jericho-html:jar:2.6.1:compile
+275943400 poi:poi:jar:2.5.1-final-20040804:compile
+385589213 poi:poi-scratchpad:jar:2.5.1-final-20040804:compile
+347951675 com.lowagie:itext:jar:1.3:compile
+214405279 com.anotherbigidea:javaswf:jar:CVS-SNAPSHOT-1:compile
+147735328 org.springframework:spring-core:jar:5.3.3:compile
+1107370131 org.springframework:spring-jcl:jar:5.3.3:compile
+1012108898 org.springframework:spring-beans:jar:5.3.3:compile
+211853855 org.springframework:spring-context:jar:5.3.3:compile
+1988962280 org.springframework:spring-aop:jar:5.3.3:compile
+1036227602 org.springframework:spring-expression:jar:5.3.3:compile
+490941782 com.esotericsoftware:kryo:jar:1.01:compile
+343594171 com.esotericsoftware:reflectasm:jar:0.8:runtime
+198640571 com.esotericsoftware:minlog:jar:1.2:runtime
+714434007 net.java.dev.jna:jna:jar:3.2.3:compile
+775476302 com.jcraft:jsch:jar:0.1.52:compile
+1814368830 org.apache.hadoop:hadoop-client:jar:3.3.1:compile
+1599868634 org.apache.hadoop:hadoop-hdfs-client:jar:3.3.1:compile
+1583772475 com.squareup.okhttp:okhttp:jar:2.7.5:compile
+915686941 com.squareup.okio:okio:jar:1.6.0:compile
+1919161875 com.fasterxml.jackson.core:jackson-annotations:jar:2.10.5:compile
+1299311707 org.apache.hadoop:hadoop-yarn-api:jar:3.3.1:compile
+551792997 org.apache.hadoop:hadoop-yarn-client:jar:3.3.1:compile
+886292426 org.eclipse.jetty.websocket:websocket-client:jar:9.4.40.v20210413:compile
+1716909005 org.eclipse.jetty:jetty-client:jar:9.4.40.v20210413:compile
+612681832 org.eclipse.jetty.websocket:websocket-common:jar:9.4.40.v20210413:compile
+433143044 org.eclipse.jetty.websocket:websocket-api:jar:9.4.40.v20210413:compile
+819330075 org.jline:jline:jar:3.9.0:compile
+2035788375 org.apache.hadoop:hadoop-mapreduce-client-core:jar:3.3.1:compile
+2073225885 org.apache.hadoop:hadoop-yarn-common:jar:3.3.1:compile
+1799078390 com.sun.jersey:jersey-client:jar:1.19:compile
+1955712430 com.fasterxml.jackson.module:jackson-module-jaxb-annotations:jar:2.10.5:compile
+810603641 com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:jar:2.10.5:compile
+1551501036 com.fasterxml.jackson.jaxrs:jackson-jaxrs-base:jar:2.10.5:compile
+1769687268 org.apache.hadoop:hadoop-mapreduce-client-jobclient:jar:3.3.1:compile
+326960344 org.apache.hadoop:hadoop-mapreduce-client-common:jar:3.3.1:compile
+632879570 org.apache.hadoop:hadoop-annotations:jar:3.3.1:compile
+695846639 org.apache.hadoop:hadoop-common:jar:3.3.1:compile
+452368204 org.apache.hadoop.thirdparty:hadoop-shaded-protobuf_3_7:jar:1.1.1:compile
+1641421582 org.apache.hadoop.thirdparty:hadoop-shaded-guava:jar:1.1.1:compile
+63051919 org.apache.commons:commons-math3:jar:3.1.1:compile
+1684797606 javax.servlet:javax.servlet-api:jar:3.1.0:compile
+1242124176 org.eclipse.jetty:jetty-servlet:jar:9.4.40.v20210413:compile
+458630068 org.eclipse.jetty:jetty-util-ajax:jar:9.4.40.v20210413:compile
+147015217 org.eclipse.jetty:jetty-webapp:jar:9.4.40.v20210413:compile
+861286727 org.eclipse.jetty:jetty-xml:jar:9.4.40.v20210413:compile
+857972082 javax.servlet.jsp:jsp-api:jar:2.1:compile
+432161569 com.sun.jersey:jersey-servlet:jar:1.19:compile
+195198182 com.sun.jersey:jersey-json:jar:1.19:compile
+159168732 org.codehaus.jettison:jettison:jar:1.1:compile
+639331468 org.codehaus.jackson:jackson-core-asl:jar:1.9.2:compile
+768342053 org.codehaus.jackson:jackson-jaxrs:jar:1.9.2:compile
+890696758 org.codehaus.jackson:jackson-xc:jar:1.9.2:compile
+1505755152 log4j:log4j:jar:1.2.17:compile
+608331944 commons-beanutils:commons-beanutils:jar:1.9.4:compile
+1446688469 org.apache.commons:commons-configuration2:jar:2.1.1:compile
+1418678112 org.apache.commons:commons-lang3:jar:3.5:compile
+227935585 org.apache.commons:commons-text:jar:1.4:compile
+983972691 org.apache.avro:avro:jar:1.7.7:compile
+967425740 com.thoughtworks.paranamer:paranamer:jar:2.3:compile
+393413334 com.google.re2j:re2j:jar:1.1:compile
+720613460 com.google.protobuf:protobuf-java:jar:2.5.0:compile
+553937658 org.apache.hadoop:hadoop-auth:jar:3.3.1:compile
+1429209032 com.nimbusds:nimbus-jose-jwt:jar:9.8.1:compile
+1522872841 com.github.stephenc.jcip:jcip-annotations:jar:1.0-1:compile
+1828935701 net.minidev:json-smart:jar:2.4.2:compile
+1876077813 net.minidev:accessors-smart:jar:2.4.2:compile
+1168756600 org.ow2.asm:asm:jar:8.0.1:compile
+915404990 org.apache.curator:curator-framework:jar:4.2.0:compile
+1102830986 org.apache.kerby:kerb-simplekdc:jar:1.0.1:compile
+1005872204 org.apache.kerby:kerb-client:jar:1.0.1:compile
+816688709 org.apache.kerby:kerby-config:jar:1.0.1:compile
+2033117926 org.apache.kerby:kerb-common:jar:1.0.1:compile
+1726361540 org.apache.kerby:kerb-crypto:jar:1.0.1:compile
+2116612432 org.apache.kerby:kerb-util:jar:1.0.1:compile
+598386518 org.apache.kerby:token-provider:jar:1.0.1:compile
+761069599 org.apache.kerby:kerb-admin:jar:1.0.1:compile
+2056422015 org.apache.kerby:kerb-server:jar:1.0.1:compile
+1124683276 org.apache.kerby:kerb-identity:jar:1.0.1:compile
+904909100 org.apache.kerby:kerby-xdr:jar:1.0.1:compile
+1895260790 org.apache.curator:curator-client:jar:4.2.0:compile
+504924013 org.apache.curator:curator-recipes:jar:4.2.0:compile
+401130380 com.google.code.findbugs:jsr305:jar:3.0.2:compile
+1548031724 org.apache.htrace:htrace-core4:jar:4.1.0-incubating:compile
+401226688 org.apache.zookeeper:zookeeper:jar:3.5.6:compile
+1301538239 org.apache.zookeeper:zookeeper-jute:jar:3.5.6:compile
+473344802 org.apache.yetus:audience-annotations:jar:0.5.0:compile
+1747991614 io.netty:netty-handler:jar:4.1.42.Final:compile
+784481987 io.netty:netty-common:jar:4.1.42.Final:compile
+2083424441 io.netty:netty-buffer:jar:4.1.42.Final:compile
+1432896421 io.netty:netty-transport:jar:4.1.42.Final:compile
+1011893498 io.netty:netty-resolver:jar:4.1.42.Final:compile
+64704917 io.netty:netty-codec:jar:4.1.42.Final:compile
+188246551 io.netty:netty-transport-native-epoll:jar:4.1.42.Final:compile
+484079038 io.netty:netty-transport-native-unix-common:jar:4.1.42.Final:compile
+571704651 org.apache.commons:commons-compress:jar:1.19:compile
+2065510245 org.apache.kerby:kerb-core:jar:1.0.1:compile
+868063939 org.apache.kerby:kerby-pkix:jar:1.0.1:compile
+2089123471 org.apache.kerby:kerby-asn1:jar:1.0.1:compile
+1107461513 org.apache.kerby:kerby-util:jar:1.0.1:compile
+1358359723 com.fasterxml.jackson.core:jackson-databind:jar:2.10.5.1:compile
+264380404 com.fasterxml.jackson.core:jackson-core:jar:2.10.5:compile
+1482979717 org.codehaus.woodstox:stax2-api:jar:4.2.1:compile
+236753357 com.fasterxml.woodstox:woodstox-core:jar:5.3.0:compile
+1776858897 org.xerial.snappy:snappy-java:jar:1.1.8.2:compile
+1984575591 dnsjava:dnsjava:jar:3.3.1:compile
+228188026 org.netarchivesuite:harvester-core:jar:7.3:compile
+1742841341 org.netarchivesuite:heritrix3-wrapper:jar:1.0.4:compile
+1268631087 com.sun.xml.bind:jaxb-impl:jar:2.2.11:compile
+1823688251 com.sun.xml.bind:jaxb-core:jar:2.2.11:compile
+798111448 com.sun.activation:javax.activation:jar:1.2.0:compile
+1161207962 commons-pool:commons-pool:jar:1.6:compile
+1614785197 jfree:jfreechart:jar:1.0.13:compile
+382450191 jfree:jcommon:jar:1.0.16:compile
+684813048 org.gnu.inet:libidn:jar:0.6.5:compile
+1486040328 com.hp.gagawa:gagawa:jar:1.0.1:compile
+1164217973 com.google.guava:guava:jar:27.0-jre:compile
+238309140 com.google.guava:failureaccess:jar:1.0:compile
+756118144 com.google.guava:listenablefuture:jar:9999.0-empty-to-avoid-conflict-with-guava:compile
+1814815047 org.checkerframework:checker-qual:jar:2.5.2:compile
+232639889 com.google.errorprone:error_prone_annotations:jar:2.2.0:compile
+566063057 com.google.j2objc:j2objc-annotations:jar:1.1:compile
+127835156 org.codehaus.mojo:animal-sniffer-annotations:jar:1.17:compile
+873231481 javax.inject:javax.inject:jar:1:compile
+1465812524 org.hibernate:hibernate-c3p0:jar:4.3.6.Final:compile
+492288241 org.jboss.logging:jboss-logging:jar:3.1.3.GA:compile
+1851455859 org.jboss.logging:jboss-logging-annotations:jar:1.2.0.Beta1:compile
+966977405 org.hibernate:hibernate-core:jar:3.3.0.SP1:compile
+451832195 antlr:antlr:jar:2.7.6:compile
+987679263 javax.transaction:jta:jar:1.1:compile
+66465110 com.mchange:c3p0:jar:0.9.5.4:compile
+759282522 com.mchange:mchange-commons-java:jar:0.2.15:compile
+1149922560 org.postgresql:postgresql:jar:42.2.10:compile
+138992060 com.antiaction:raptor-dbl:jar:0.1.0-RC2:compile
+979818878 com.antiaction:common-servlet:jar:0.1.0-NAS:compile
+450706947 com.antiaction:common-html:jar:0.1.0-NAS:compile
+220766773 com.antiaction:common-template-engine:jar:0.3.0-NAS:compile
+1138954005 org.netarchivesuite:common-test:jar:7.3:test
+1338151742 org.netarchivesuite:netarchivesuite-test-utils:jar:7.3:test
+1016893923 org.cthul:cthul-matchers:jar:1.1.0:test
+1953342799 org.cthul:cthul-objects:jar:jdk16:1.2:test
+791512944 org.apache.hadoop:hadoop-minicluster:jar:3.3.1:test
+1949153992 org.apache.hadoop:hadoop-common:test-jar:tests:3.3.1:test
+753282599 org.apache.hadoop:hadoop-hdfs:test-jar:tests:3.3.1:test
+892903721 commons-daemon:commons-daemon:jar:1.0.13:test
+1986901753 io.netty:netty-all:jar:4.1.61.Final:test
+1871689990 org.fusesource.leveldbjni:leveldbjni-all:jar:1.8:test
+1921332678 org.apache.hadoop:hadoop-yarn-server-tests:test-jar:tests:3.3.1:test
+38073174 org.apache.hadoop:hadoop-yarn-server-common:jar:3.3.1:test
+428169113 org.apache.hadoop:hadoop-registry:jar:3.3.1:test
+198220326 org.apache.geronimo.specs:geronimo-jcache_1.0_spec:jar:1.0-alpha-1:test
+1344320927 org.ehcache:ehcache:jar:3.3.1:test
+1977299598 com.zaxxer:HikariCP-java7:jar:2.4.12:test
+1188137523 com.microsoft.sqlserver:mssql-jdbc:jar:6.2.1.jre7:test
+1230977381 org.apache.hadoop:hadoop-yarn-server-nodemanager:jar:3.3.1:test
+470217116 org.eclipse.jetty.websocket:javax-websocket-server-impl:jar:9.4.40.v20210413:test
+811986896 org.eclipse.jetty:jetty-annotations:jar:9.4.40.v20210413:test
+2058316797 org.eclipse.jetty:jetty-plus:jar:9.4.40.v20210413:test
+1250685404 org.eclipse.jetty:jetty-jndi:jar:9.4.40.v20210413:test
+1638556416 javax.annotation:javax.annotation-api:jar:1.3.2:test
+2116946826 org.ow2.asm:asm-commons:jar:9.0:test
+2136962865 org.ow2.asm:asm-tree:jar:9.0:test
+1783594007 org.ow2.asm:asm-analysis:jar:9.0:test
+1481617469 org.eclipse.jetty.websocket:javax-websocket-client-impl:jar:9.4.40.v20210413:test
+1446220517 javax.websocket:javax.websocket-client-api:jar:1.0:test
+1389461997 org.eclipse.jetty.websocket:websocket-server:jar:9.4.40.v20210413:test
+1139794020 org.eclipse.jetty.websocket:websocket-servlet:jar:9.4.40.v20210413:test
+1711566460 javax.websocket:javax.websocket-api:jar:1.0:test
+745172195 io.dropwizard.metrics:metrics-core:jar:3.2.4:test
+1919573610 com.google.inject:guice:jar:4.0:test
+1312451715 aopalliance:aopalliance:jar:1.0:test
+193502390 com.sun.jersey.contribs:jersey-guice:jar:1.19:test
+1962603600 org.apache.hadoop:hadoop-yarn-server-resourcemanager:jar:3.3.1:test
+1422097835 org.apache.hadoop:hadoop-yarn-server-applicationhistoryservice:jar:3.3.1:test
+1224760772 de.ruedigermoeller:fst:jar:2.50:test
+111281534 org.objenesis:objenesis:jar:2.5.1:test
+634988942 com.cedarsoftware:java-util:jar:1.9.0:test
+1790453435 com.cedarsoftware:json-io:jar:2.5.1:test
+563984469 org.apache.hadoop:hadoop-yarn-server-timelineservice:jar:3.3.1:test
+922931437 org.apache.commons:commons-csv:jar:1.0:test
+1534790362 org.apache.hadoop:hadoop-mapreduce-client-jobclient:test-jar:tests:3.3.1:test
+1885172464 com.google.inject.extensions:guice-servlet:jar:4.0:test
+1011753918 org.apache.hadoop:hadoop-hdfs:jar:3.3.1:test
+493488482 org.apache.hadoop:hadoop-mapreduce-client-app:jar:3.3.1:test
+516226511 org.apache.hadoop:hadoop-mapreduce-client-shuffle:jar:3.3.1:test
+85317141 org.apache.hadoop:hadoop-mapreduce-client-hs:jar:3.3.1:test
+1217087194 org.apache.hadoop:hadoop-yarn-server-web-proxy:jar:3.3.1:test
+99055536 commons-httpclient:commons-httpclient:jar:3.1:compile
+1014290502 commons-cli:commons-cli:jar:1.4:compile
+402265251 commons-logging:commons-logging:jar:1.2:compile
+89468176 commons-lang:commons-lang:jar:2.3:compile
+993104125 org.archive.heritrix:heritrix-engine:jar:3.4.0-NAS-7.3:compile
+563992885 org.archive.heritrix:heritrix-modules:jar:3.4.0-NAS-7.3:compile
+1720032937 org.beanshell:bsh:jar:2.0b5:compile
+1251218116 org.codehaus.groovy:groovy-jsr223:jar:3.0.8:compile
+2098578707 org.codehaus.groovy:groovy:jar:3.0.8:compile
+839843829 org.codehaus.groovy:groovy-templates:jar:3.0.8:compile
+2025082827 org.codehaus.groovy:groovy-xml:jar:3.0.8:runtime
+316436523 org.eclipse.jetty:jetty-security:jar:9.4.37.v20210219:compile
+1102189118 com.github.crawler-commons:crawler-commons:jar:1.0:compile
+75938986 org.eclipse.jetty:jetty-server:jar:9.4.37.v20210219:compile
+1586917862 org.eclipse.jetty:jetty-http:jar:9.4.37.v20210219:compile
+792334135 org.eclipse.jetty:jetty-io:jar:9.4.37.v20210219:compile
+2127092492 org.eclipse.jetty:jetty-util:jar:9.4.37.v20210219:compile
+1327127443 org.restlet.jse:org.restlet:jar:2.4.0:compile
+586029783 org.restlet.jse:org.restlet.ext.jetty:jar:2.4.0:compile
+1574103562 org.restlet.jse:org.restlet.ext.xml:jar:2.4.0:compile
+1710901767 org.restlet.jse:org.restlet.ext.crypto:jar:2.4.0:compile
+2015445992 joda-time:joda-time:jar:1.6:compile
+709613209 javax.xml.bind:jaxb-api:jar:2.3.1:compile
+1610869600 javax.activation:javax.activation-api:jar:1.2.0:compile
+1461595925 org.glassfish.jaxb:jaxb-runtime:jar:2.3.1:runtime
+626137117 org.glassfish.jaxb:txw2:jar:2.3.1:runtime
+1373240624 com.sun.istack:istack-commons-runtime:jar:3.0.7:runtime
+780027008 org.jvnet.staxex:stax-ex:jar:1.8:runtime
+146714845 com.sun.xml.fastinfoset:FastInfoset:jar:1.2.15:runtime
+1033491239 org.freemarker:freemarker:jar:2.3.19:compile
+590842329 org.netpreserve.commons:webarchive-commons:jar:1.1.5:compile
+2133955451 it.unimi.dsi:dsiutils:jar:2.0.12:compile
+49609752 it.unimi.dsi:fastutil:jar:6.5.2:compile
+1904674698 com.martiansoftware:jsap:jar:2.1:compile
+1851859234 commons-configuration:commons-configuration:jar:1.8:compile
+490261982 org.archive.heritrix:heritrix-contrib:jar:3.4.0-NAS-7.3:compile
+940176989 org.apache.hbase:hbase-client:jar:0.98.6-cdh5.3.5:compile
+1903889793 org.apache.hbase:hbase-common:jar:0.98.6-cdh5.3.5:compile
+376724157 org.apache.hadoop:hadoop-core:jar:2.5.0-mr1-cdh5.3.5:compile
+1299788688 xmlenc:xmlenc:jar:0.52:compile
+976592764 tomcat:jasper-runtime:jar:5.5.23:compile
+327916222 tomcat:jasper-compiler:jar:5.5.23:compile
+664701888 commons-el:commons-el:jar:1.0:compile
+603965712 javax.servlet:servlet-api:jar:2.3:compile
+891780204 hsqldb:hsqldb:jar:1.8.0.10:compile
+2050379292 org.eclipse.jdt:core:jar:3.1.1:compile
+698681873 org.apache.hbase:hbase-protocol:jar:0.98.6-cdh5.3.5:compile
+1959784828 io.netty:netty:jar:3.6.6.Final:compile
+2047162261 org.cloudera.htrace:htrace-core:jar:2.04:compile
+848019559 org.codehaus.jackson:jackson-mapper-asl:jar:1.8.8:compile
+864006565 com.github.stephenc.findbugs:findbugs-annotations:jar:1.3.9-1:compile
+951116455 com.rabbitmq:amqp-client:jar:4.8.0:compile
+1809503163 com.itextpdf:itextpdf:jar:5.5.0:compile
+121548383 org.apache.kafka:kafka_2.10:jar:0.9.0.0:compile
+1224918404 com.101tec:zkclient:jar:0.7:compile
+1989714905 com.yammer.metrics:metrics-core:jar:2.2.0:compile
+1264775610 org.scala-lang:scala-library:jar:2.10.5:compile
+970777311 net.sf.jopt-simple:jopt-simple:jar:3.2:compile
+1714241157 org.apache.kafka:kafka-clients:jar:0.9.0.0:compile
+1436082162 net.jpountz.lz4:lz4:jar:1.2.0:compile
+153820122 com.rethinkdb:rethinkdb-driver:jar:2.3.3:compile
+1472186938 com.googlecode.json-simple:json-simple:jar:1.1.1:compile
+1483280222 com.google.code.gson:gson:jar:2.8.6:compile
+1268591854 org.java-websocket:Java-WebSocket:jar:1.5.2:compile
+439946124 com.sleepycat:je:jar:5.0.73:compile
+863956203 org.apache.lucene:lucene-core:jar:4.4.0:compile
+595396133 org.apache.lucene:lucene-analyzers-common:jar:4.4.0:compile
+27632888 org.twitter4j:twitter4j-core:jar:2.2.6:compile
+1402120747 dom4j:dom4j:jar:1.6.1:test
+391056646 org.json:json:jar:20131018:compile
+1556643300 junit:junit:jar:4.11:test
+1885769953 org.hamcrest:hamcrest-core:jar:1.3:test
+#
+848564270 1516876751 compile
+835522298 848564270 compile
+1391532202 835522298 compile
+1543760718 1645805674 compile
+1543760718 511929069 compile
+1543760718 1271141733 compile
+1543760718 148823752 compile
+1543760718 577672681 compile
+1543760718 666851147 compile
+1543760718 1287328228 compile
+846052901 1685759068 compile
+846052901 958575255 compile
+1543760718 846052901 compile
+755146854 1925300085 compile
+755146854 1135131957 compile
+755146854 1873943005 compile
+1543760718 755146854 compile
+1543760718 1460372957 compile
+1543760718 684634718 compile
+1543760718 772399975 compile
+1543760718 1368030090 compile
+1391532202 1543760718 compile
+1391532202 1512323339 compile
+119880787 1725359371 compile
+1391532202 119880787 compile
+1391532202 1686279280 compile
+529864074 838624655 compile
+529864074 1624449030 compile
+1391532202 529864074 compile
+276957560 663512999 compile
+276957560 1972289220 compile
+276957560 203715427 compile
+276957560 208499286 compile
+1209568547 1214276218 compile
+276957560 1209568547 compile
+1391532202 276957560 compile
+1391532202 1743830910 compile
+1391532202 15240724 compile
+1391532202 202734271 compile
+1391532202 1194179317 compile
+1391532202 633665057 compile
+1391532202 1637373091 compile
+1191123629 1815079573 compile
+1391532202 1191123629 compile
+1391532202 1859681487 compile
+1391532202 1296433403 compile
+1622828593 1294553325 compile
+1934770572 1622828593 compile
+1391532202 1934770572 compile
+1391532202 815124587 compile
+1391532202 1370139092 compile
+1391532202 1653786174 compile
+1391532202 1706773689 compile
+1391532202 2066996973 compile
+1391532202 2144545878 compile
+1391532202 184854180 compile
+1391532202 879095289 compile
+1371838766 924040924 compile
+1391532202 1371838766 compile
+1391532202 428609308 compile
+1391532202 43856881 compile
+1391532202 2011547493 compile
+1391532202 1571447323 compile
+614953565 1338957699 compile
+1391532202 614953565 compile
+1391532202 382334960 compile
+1391532202 410908040 compile
+1391532202 131553600 compile
+1046265086 1735637682 compile
+1046265086 274059873 compile
+1391532202 1046265086 compile
+1391532202 762676338 compile
+1391532202 1981113966 compile
+1391532202 206169140 compile
+850520326 870759734 compile
+850520326 1847434034 compile
+850520326 766950017 compile
+850520326 275943400 compile
+850520326 385589213 compile
+850520326 347951675 compile
+850520326 214405279 compile
+147735328 1107370131 compile
+850520326 147735328 compile
+850520326 1012108898 compile
+211853855 1988962280 compile
+850520326 211853855 compile
+850520326 1036227602 compile
+850520326 490941782 compile
+850520326 343594171 runtime
+850520326 198640571 runtime
+850520326 714434007 compile
+850520326 775476302 compile
+1391532202 850520326 compile
+1583772475 915686941 compile
+1599868634 1583772475 compile
+1599868634 1919161875 compile
+1814368830 1599868634 compile
+1814368830 1299311707 compile
+886292426 1716909005 compile
+612681832 433143044 compile
+886292426 612681832 compile
+551792997 886292426 compile
+551792997 819330075 compile
+1814368830 551792997 compile
+2073225885 1799078390 compile
+2073225885 1955712430 compile
+810603641 1551501036 compile
+2073225885 810603641 compile
+2035788375 2073225885 compile
+1814368830 2035788375 compile
+1769687268 326960344 compile
+1814368830 1769687268 compile
+1814368830 632879570 compile
+1391532202 1814368830 compile
+695846639 452368204 compile
+695846639 1641421582 compile
+695846639 63051919 compile
+695846639 1684797606 compile
+1242124176 458630068 compile
+695846639 1242124176 compile
+147015217 861286727 compile
+695846639 147015217 compile
+695846639 857972082 compile
+695846639 432161569 compile
+195198182 159168732 compile
+195198182 639331468 compile
+195198182 768342053 compile
+195198182 890696758 compile
+695846639 195198182 compile
+695846639 1505755152 compile
+695846639 608331944 compile
+695846639 1446688469 compile
+695846639 1418678112 compile
+695846639 227935585 compile
+983972691 967425740 compile
+695846639 983972691 compile
+695846639 393413334 compile
+695846639 720613460 compile
+1429209032 1522872841 compile
+553937658 1429209032 compile
+1876077813 1168756600 compile
+1828935701 1876077813 compile
+553937658 1828935701 compile
+553937658 915404990 compile
+1005872204 816688709 compile
+2033117926 1726361540 compile
+1005872204 2033117926 compile
+1005872204 2116612432 compile
+1005872204 598386518 compile
+1102830986 1005872204 compile
+2056422015 1124683276 compile
+761069599 2056422015 compile
+761069599 904909100 compile
+1102830986 761069599 compile
+553937658 1102830986 compile
+695846639 553937658 compile
+695846639 1895260790 compile
+695846639 504924013 compile
+695846639 401130380 compile
+695846639 1548031724 compile
+401226688 1301538239 compile
+401226688 473344802 compile
+1747991614 784481987 compile
+1747991614 2083424441 compile
+1432896421 1011893498 compile
+1747991614 1432896421 compile
+1747991614 64704917 compile
+401226688 1747991614 compile
+188246551 484079038 compile
+401226688 188246551 compile
+695846639 401226688 compile
+695846639 571704651 compile
+868063939 2089123471 compile
+868063939 1107461513 compile
+2065510245 868063939 compile
+695846639 2065510245 compile
+1358359723 264380404 compile
+695846639 1358359723 compile
+695846639 1482979717 compile
+695846639 236753357 compile
+695846639 1776858897 compile
+1391532202 695846639 compile
+1391532202 1984575591 compile
+1750040348 1391532202 compile
+1742841341 1268631087 compile
+1742841341 1823688251 compile
+1742841341 798111448 compile
+228188026 1742841341 compile
+228188026 1161207962 compile
+1614785197 382450191 compile
+228188026 1614785197 compile
+228188026 684813048 compile
+228188026 1486040328 compile
+1164217973 238309140 compile
+1164217973 756118144 compile
+1164217973 1814815047 compile
+1164217973 232639889 compile
+1164217973 566063057 compile
+1164217973 127835156 compile
+228188026 1164217973 compile
+228188026 873231481 compile
+1465812524 492288241 compile
+1465812524 1851455859 compile
+966977405 451832195 compile
+966977405 987679263 compile
+1465812524 966977405 compile
+66465110 759282522 compile
+1465812524 66465110 compile
+228188026 1465812524 compile
+228188026 1149922560 compile
+228188026 138992060 compile
+228188026 979818878 compile
+228188026 450706947 compile
+228188026 220766773 compile
+1750040348 228188026 compile
+1138954005 1338151742 test
+1016893923 1953342799 test
+1138954005 1016893923 test
+791512944 1949153992 test
+753282599 892903721 test
+753282599 1986901753 test
+753282599 1871689990 test
+791512944 753282599 test
+38073174 428169113 test
+38073174 198220326 test
+38073174 1344320927 test
+38073174 1977299598 test
+38073174 1188137523 test
+1921332678 38073174 test
+2058316797 1250685404 test
+811986896 2058316797 test
+811986896 1638556416 test
+2116946826 2136962865 test
+2116946826 1783594007 test
+811986896 2116946826 test
+470217116 811986896 test
+1481617469 1446220517 test
+470217116 1481617469 test
+1389461997 1139794020 test
+470217116 1389461997 test
+470217116 1711566460 test
+1230977381 470217116 test
+1230977381 745172195 test
+1919573610 1312451715 test
+1230977381 1919573610 test
+1230977381 193502390 test
+1921332678 1230977381 test
+1224760772 111281534 test
+634988942 1790453435 test
+1224760772 634988942 test
+1422097835 1224760772 test
+1962603600 1422097835 test
+1921332678 1962603600 test
+563984469 922931437 test
+1921332678 563984469 test
+791512944 1921332678 test
+1534790362 1885172464 test
+791512944 1534790362 test
+791512944 1011753918 test
+493488482 516226511 test
+791512944 493488482 test
+791512944 85317141 test
+791512944 1217087194 test
+1138954005 791512944 test
+1750040348 1138954005 test
+1750040348 99055536 compile
+1750040348 1014290502 compile
+1750040348 402265251 compile
+1750040348 89468176 compile
+563992885 1720032937 compile
+1251218116 2098578707 compile
+563992885 1251218116 compile
+839843829 2025082827 runtime
+563992885 839843829 compile
+563992885 316436523 compile
+563992885 1102189118 compile
+993104125 563992885 compile
+75938986 1586917862 compile
+75938986 792334135 compile
+993104125 75938986 compile
+993104125 2127092492 compile
+993104125 1327127443 compile
+993104125 586029783 compile
+993104125 1574103562 compile
+993104125 1710901767 compile
+993104125 2015445992 compile
+709613209 1610869600 compile
+993104125 709613209 compile
+1461595925 626137117 runtime
+1461595925 1373240624 runtime
+1461595925 780027008 runtime
+1461595925 146714845 runtime
+993104125 1461595925 runtime
+993104125 1033491239 compile
+1750040348 993104125 compile
+2133955451 49609752 compile
+2133955451 1904674698 compile
+2133955451 1851859234 compile
+590842329 2133955451 compile
+1750040348 590842329 compile
+376724157 1299788688 compile
+376724157 976592764 compile
+376724157 327916222 compile
+376724157 664701888 compile
+376724157 603965712 compile
+376724157 891780204 compile
+376724157 2050379292 compile
+1903889793 376724157 compile
+940176989 1903889793 compile
+940176989 698681873 compile
+940176989 1959784828 compile
+940176989 2047162261 compile
+940176989 848019559 compile
+940176989 864006565 compile
+490261982 940176989 compile
+490261982 951116455 compile
+490261982 1809503163 compile
+121548383 1224918404 compile
+121548383 1989714905 compile
+121548383 1264775610 compile
+121548383 970777311 compile
+1714241157 1436082162 compile
+121548383 1714241157 compile
+490261982 121548383 compile
+153820122 1472186938 compile
+490261982 153820122 compile
+490261982 1483280222 compile
+490261982 1268591854 compile
+1750040348 490261982 compile
+1750040348 439946124 compile
+1750040348 863956203 compile
+1750040348 595396133 compile
+1750040348 27632888 compile
+1750040348 1402120747 test
+1750040348 391056646 compile
+1556643300 1885769953 test
+1750040348 1556643300 test

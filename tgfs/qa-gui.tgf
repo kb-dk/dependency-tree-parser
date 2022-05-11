@@ -1,0 +1,4 @@
+1792904767 org.netarchivesuite:qa-gui:war:7.3
+345060426 javax.servlet:servlet-api:jar:2.3:provided
+#
+1792904767 345060426 provided

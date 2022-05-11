@@ -1,0 +1,90 @@
+1805672691 org.bitrepository.reference:bitrepository-service:jar:1.9
+547853628 org.bitrepository.reference:bitrepository-core:jar:1.9:compile
+1472200981 org.bitrepository.reference:bitrepository-reference-settings:jar:1.9:compile
+82328216 org.bitrepository.repository-settings:bitrepository-repository-settings-xsd:jar:12:compile
+397052433 org.bitrepository.repository-settings:bitrepository-repository-settings-java:jar:12:compile
+1907767760 org.bitrepository:bitrepository-message-xml-xsd:jar:30:compile
+413293501 org.bitrepository:bitrepository-message-xml-java:jar:30:compile
+1566285515 commons-lang:commons-lang:jar:2.6:compile
+518159731 commons-io:commons-io:jar:2.4:compile
+1583001542 org.apache.httpcomponents:httpclient:jar:4.5.1:compile
+1412392963 org.apache.httpcomponents:httpcore:jar:4.4.3:compile
+1434651019 commons-logging:commons-logging:jar:1.2:compile
+1476915117 org.bouncycastle:bcprov-jdk15on:jar:1.54:compile
+1403539444 org.bouncycastle:bcmail-jdk15on:jar:1.54:compile
+2095602418 org.bouncycastle:bcpkix-jdk15on:jar:1.54:compile
+829082549 org.apache.activemq:activemq-client:jar:5.13.3:compile
+1459040434 org.apache.geronimo.specs:geronimo-jms_1.1_spec:jar:1.1.1:compile
+1194398327 org.fusesource.hawtbuf:hawtbuf:jar:1.11:compile
+2033254313 org.apache.geronimo.specs:geronimo-j2ee-management_1.1_spec:jar:1.0.1:compile
+509654105 commons-codec:commons-codec:jar:1.9:compile
+1904047495 org.apache.derby:derby:jar:10.12.1.1:compile
+1049650037 org.apache.derby:derbyclient:jar:10.12.1.1:compile
+1076039353 org.apache.derby:derbynet:jar:10.12.1.1:compile
+1534765208 org.apache.derby:derbytools:jar:10.12.1.1:compile
+1102135101 org.postgresql:postgresql:jar:9.4.1211:compile
+2080864181 com.mchange:c3p0:jar:0.9.5.2:compile
+613017674 com.mchange:mchange-commons-java:jar:0.2.11:compile
+708422187 javax.servlet:javax.servlet-api:jar:3.1.0:provided
+1656303750 org.bitrepository.reference:bitrepository-core:test-jar:tests:1.9:test
+625232315 org.slf4j:slf4j-api:jar:1.7.21:compile
+1315188449 ch.qos.logback:logback-classic:jar:1.1.7:compile
+703315444 ch.qos.logback:logback-core:jar:1.1.7:compile
+50173263 org.jvnet.jaxb2_commons:jaxb2-basics-runtime:jar:0.11.1:compile
+91430202 org.testng:testng:jar:6.9.10:test
+1779378259 com.beust:jcommander:jar:1.48:test
+520043771 org.beanshell:bsh:jar:2.0b4:test
+1892062598 org.mockito:mockito-core:jar:1.9.5:test
+1841421417 org.hamcrest:hamcrest-core:jar:1.1:test
+2124360754 org.objenesis:objenesis:jar:1.0:test
+434167806 org.slf4j:jul-to-slf4j:jar:1.7.21:compile
+1565397985 org.slf4j:log4j-over-slf4j:jar:1.7.21:compile
+1041219253 org.slf4j:jcl-over-slf4j:jar:1.7.21:compile
+964094970 org.jaccept:jaccept-core:jar:0.4:test
+645323781 org.jentity:jentity-core:jar:0.3:test
+185209393 log4j:log4j:jar:1.2.17:test
+#
+547853628 1472200981 compile
+547853628 82328216 compile
+547853628 397052433 compile
+547853628 1907767760 compile
+547853628 413293501 compile
+547853628 1566285515 compile
+547853628 518159731 compile
+1583001542 1412392963 compile
+1583001542 1434651019 compile
+547853628 1583001542 compile
+547853628 1476915117 compile
+1403539444 2095602418 compile
+547853628 1403539444 compile
+829082549 1459040434 compile
+829082549 1194398327 compile
+829082549 2033254313 compile
+547853628 829082549 compile
+547853628 509654105 compile
+1805672691 547853628 compile
+1805672691 1904047495 compile
+1805672691 1049650037 compile
+1805672691 1076039353 compile
+1805672691 1534765208 compile
+1805672691 1102135101 compile
+2080864181 613017674 compile
+1805672691 2080864181 compile
+1805672691 708422187 provided
+1805672691 1656303750 test
+1805672691 625232315 compile
+1315188449 703315444 compile
+1805672691 1315188449 compile
+1805672691 50173263 compile
+91430202 1779378259 test
+91430202 520043771 test
+1805672691 91430202 test
+1892062598 1841421417 test
+1892062598 2124360754 test
+1805672691 1892062598 test
+1805672691 434167806 compile
+1805672691 1565397985 compile
+1805672691 1041219253 compile
+964094970 645323781 test
+964094970 185209393 test
+1805672691 964094970 test

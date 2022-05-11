@@ -1,0 +1,4 @@
+680466239 org.netarchivesuite:netarchivesuite-test-utils:jar:7.3
+904031493 dom4j:dom4j:jar:1.6.1:compile
+#
+680466239 904031493 compile
