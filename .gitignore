@@ -132,3 +132,5 @@ dmypy.json
 releases/*
 new_releases/*
 tgfs/*
+structure.json
+structure.csv

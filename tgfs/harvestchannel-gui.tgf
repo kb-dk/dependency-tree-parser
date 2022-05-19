@@ -1,8 +1,0 @@
-1395533739 org.netarchivesuite:harvestchannel-gui:war:7.3
-1167813715 javax.servlet:servlet-api:jar:2.3:provided
-1612031141 junit:junit:jar:4.11:test
-1829440934 org.hamcrest:hamcrest-core:jar:1.3:test
-#
-1395533739 1167813715 provided
-1612031141 1829440934 test
-1395533739 1612031141 test

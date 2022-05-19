@@ -1,6 +1,0 @@
-619406819 org.netarchivesuite:heritrix1:pom:5.3
-1741618564 junit:junit:jar:4.11:test
-100393301 org.hamcrest:hamcrest-core:jar:1.3:test
-#
-1741618564 100393301 test
-619406819 1741618564 test
