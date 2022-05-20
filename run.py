@@ -1,5 +1,6 @@
 import csv
 import json
+import logging
 import os
 import subprocess
 import sys
@@ -7,17 +8,19 @@ from configparser import ConfigParser
 
 from lxml import etree
 
-structure = {}
-dependency_map = {}
-obj = {}
+structure, dependency_map, obj = {}, {}, {}
 
 config = ConfigParser()
 config.read("config.conf")
 number_of_runs = int(config.get("worker", "find_children_runs"))
-URL = config.get("worker", "namespace_url")
+URL = config.get("all", "namespace_url")
 ns = {
     'pom': URL
 }
+LOGGING_LEVEL = config.get("all", "logging_level").upper()
+logging.basicConfig(
+    format='%(asctime)s %(levelname)s: %(message)s',
+    level=LOGGING_LEVEL)
 
 ignored_parents = ['sbforge-parent', 'sbprojects-parent', 'oss-parent']
 strings_to_replace = ['${parent.artifactid}', '${parent.artifactId}', '${project.parent.artifactId}', '${project.parent.artifactid}']

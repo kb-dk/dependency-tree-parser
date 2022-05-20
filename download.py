@@ -7,10 +7,6 @@ from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
 
-logging.basicConfig(
-    format='%(asctime)s %(levelname)s:%(message)s',
-    level=logging.INFO)
-
 ignored_parents = ["sbforge-parent", "sbprojects-parent", "oss-parent"]
 
 config = ConfigParser()
@@ -20,8 +16,13 @@ CRAWL_OUTPUT_DIR = config.get("nexus_crawl", "output_dir")
 DIR_TRAVERSAL_BASE_DIR = config.get("dir_traversal", "base_dir")
 DIR_TRAVERSAL_OUTPUT_DIR = config.get("dir_traversal", "output_dir")
 
-ns = "http://maven.apache.org/POM/4.0.0"
-xml.register_namespace('', ns)
+LOGGING_LEVEL = config.get("all", "logging_level").upper()
+logging.basicConfig(
+    format='%(asctime)s %(levelname)s: %(message)s',
+    level=LOGGING_LEVEL)
+
+URL = config.get("all", "namespace_url")
+xml.register_namespace('', URL)
 tree = xml.ElementTree()
 
 visited = set()
@@ -44,7 +45,7 @@ def __download_pom(url, destination_dir):
     """ Downloads the pom content at the given url and writes it to pom.xml under the given destination directory.
     The given url is expected to link directly to the content of a pom file, i.e.
     https://example-nexus.com/org/project/artifact-id/1.0.0/artifact_id-1.0.0.pom """
-    print(destination_dir)
+    logging.info(f'Writing pom to: {destination_dir}')
     pom_content = __get_html(url)
     Path(destination_dir).mkdir(parents=True, exist_ok=True)
     pom_path = os.path.join(destination_dir, "pom.xml")
@@ -73,7 +74,7 @@ def __get_newest_pom(artifact_id_url, destination_dir):
 def __crawl_nexus(url, path):
     """ Recursively crawls nexus from the given url, building an equivalent folder structure to nexus from
     the provided path and downloading pom files to their respective project folders. """
-    # logging.info(f'Crawling: {url}')
+    logging.debug(f'Crawling: {url}')
     for link_url in __get_links_at_url(url):
         # Need to check if folder contains version numbers and then just check latest.
 
@@ -86,8 +87,6 @@ def __crawl_nexus(url, path):
                 current_link_dir = os.path.basename(link_url[:-1])
                 new_path = os.path.join(path, current_link_dir)
                 __crawl_nexus(link_url, new_path)
-            # else:
-            #    print('Ignoring ' + link_url)
         elif link_url.endswith('.pom'):
             local_artifact_dir = os.path.dirname(path)
 
