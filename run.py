@@ -61,9 +61,9 @@ def run(file_type, path='releases/'):
                     __find_children(os.path.join(root, files[0]))
 
     if poms_left > 0:
-        print('Poms not assigned: ' + str(poms_left) + '/' + str(total_nr_of_poms))
+        logging.info(f'Could not assign {str(poms_left)} out of {str(total_nr_of_poms)} poms.')
     else:
-        print('All poms assigned.')
+        logging.info('All poms assigned.')
 
     # Update dependency versions
     __update_dependency_versions()
@@ -179,6 +179,7 @@ def __check_version(package_id, version):
     if version and '${' in version and package_id in dependency_map:
         for i in dependency_map[package_id]:
             if version in i:
+                logging.debug(f'Updated version: {version} -> {i[version]}')
                 return i[version]
     return version
 
@@ -256,8 +257,8 @@ def __find_children(path, last_round=False):
             return 1
         # If it was not created, and not skipped due to being a duplicate print the path that was skipped.
         elif not created_using_alt_name and last_round:
-            print(path)
-            print('     | ' + package_id + ' (' + str(alt_package_id) + ')' + ' | ' + str(parent_id) + ' | ' + str(child_id))
+            logging.debug(f'Could not assign: {path}')
+            logging.debug(f'         -| {package_id} ({str(alt_package_id)})  :  {str(parent_id)}  :  {str(child_id)}')
         return 0
 
 
@@ -268,6 +269,7 @@ def __create_package(package):
     """
     if package not in structure:
         structure[package] = {'modules': [], 'alt-name': []}
+        logging.debug(f'Created package: {package}')
 
 
 def __get_pom_vars(tree):
@@ -308,7 +310,9 @@ def __fix_name(name, parent_id):
     """
     for string in strings_to_replace:
         if string in name:
-            return name.replace(string, parent_id)
+            new_name = name.replace(string, parent_id)
+            logging.debug(f'Name changed: {name} -> {new_name}')
+            return new_name
     return name
 
 
@@ -322,7 +326,10 @@ def __add_child(child_id, version, dependencies, index):
     :return: Returns True
     """
     if not any(d.get(child_id) for d in index['modules']):
+        logging.debug(f'Created: {child_id}.')
         index['modules'].append({child_id: version, 'modules': [], 'dependencies': dependencies})
+    else:
+        logging.debug(f'Skipped: {child_id} - already exists.')
     return True
 
 
@@ -339,14 +346,15 @@ def __find_children_alt_name(parent_id, package_id, child_id, alt_package_id, ve
     """
     # FIXME: Make this recursive for better readability
     for key, val in obj.items():
-        alt_name = val['alt-name']
-        if alt_name is not None and package_id in alt_name:
+        alt_names = val['alt-name']
+        if alt_names is not None and package_id in alt_names:
             for module in range(len(obj[key]['modules'])):
                 inner_modules = obj[key]['modules'][module]['modules']
                 for inner in inner_modules:
                     if parent_id in inner:
                         alt_list = obj[key]['alt-name']
                         if alt_package_id is not None and alt_package_id not in alt_list:
+                            logging.debug(f'Alt-name \'{alt_package_id}\' added to \'{key}\'.')
                             alt_list.append(alt_package_id)
                         return __add_child(child_id, version, dependencies, inner)
                     else:
@@ -355,6 +363,7 @@ def __find_children_alt_name(parent_id, package_id, child_id, alt_package_id, ve
                             if parent_id in inner_2:
                                 alt_list = obj[key]['alt-name']
                                 if alt_package_id is not None and alt_package_id not in alt_list:
+                                    logging.debug(f'Alt-name \'{alt_package_id}\' added to \'{key}\'.')
                                     alt_list.append(alt_package_id)
                                 return __add_child(child_id, version, dependencies, inner_2)
                             else:
@@ -363,6 +372,7 @@ def __find_children_alt_name(parent_id, package_id, child_id, alt_package_id, ve
                                     if parent_id in inner_3:
                                         alt_list = obj[key]['alt-name']
                                         if alt_package_id is not None and alt_package_id not in alt_list:
+                                            logging.debug(f'Alt-name \'{alt_package_id}\' added to \'{key}\'.')
                                             alt_list.append(alt_package_id)
                                         return __add_child(child_id, version, dependencies, inner_3)
             return False
@@ -394,13 +404,14 @@ def __remove_alt_name():
     """ Removes the 'alt-name' key from the dictionary."""
     for key, val in obj.items():
         obj[key].pop('alt-name')
+        logging.debug(f'Removed \'alt-name\' key from dictionary.')
 
 
 def __write_json(string):
     """ Writes the dictionary to a .json file. """
     with open('structure.json', 'w') as output:
         json.dump(string, output)
-    print('Structure written to .json file.')
+    logging.info('Structure written to .json file.')
 
 
 def __write_csv():
@@ -412,7 +423,7 @@ def __write_csv():
             row = {'package': key}
             row.update(val)
             writer.writerow(row)
-    print('Structure written to .csv file.')
+    logging.info('Structure written to .csv file.')
 
 
 def __count_poms(path='releases/'):
