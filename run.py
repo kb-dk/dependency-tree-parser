@@ -119,7 +119,7 @@ def __map_dependency_version(package_id, version, tree):
     properties = tree.xpath('./pom:properties', namespaces=ns)
     old_maps = dependency_map[package_id] if package_id in dependency_map else []
     maps = []
-    # FIXME: ${project.version} needs to be handled differently, since every package_id can have multiple of these.
+    # FIXME: Case where version is ${project.version} needs to be handled differently, since every package_id can have multiple of these.
     # project_version_created = False
     # for x in old_maps:
     #     if '${project.version}' in x:
