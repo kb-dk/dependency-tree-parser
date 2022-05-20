@@ -1,6 +1,5 @@
 import logging
 import os
-import sys
 import xml.etree.ElementTree as xml
 from configparser import ConfigParser
 from pathlib import Path
@@ -102,11 +101,6 @@ def __crawl_nexus(url, path):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Need arguments")
-        sys.exit(1)
-
-    if sys.argv[1] == "download":
-        Path("releases").mkdir(exist_ok=True)
-        nexus_url = "https://sbforge.org/nexus/content/repositories/releases"
-        __crawl_nexus(nexus_url, 'releases')
+    Path("releases").mkdir(exist_ok=True)
+    nexus_url = "https://sbforge.org/nexus/content/repositories/releases"
+    __crawl_nexus(nexus_url, 'releases')
