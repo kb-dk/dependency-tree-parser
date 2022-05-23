@@ -58,6 +58,7 @@ class Utility:
         """
         Updates the version of every dependency found, when traversing the dictionary object.
         """
+        # FIXME: introduce recursion
         for key, val in self.obj.items():
             for parent in val['modules']:
                 self.update_version(key, parent)
@@ -73,10 +74,9 @@ class Utility:
         :param package_id: The package ID.
         :param parent: The modules that are currently being traversed.
         """
-        for dependencies in parent['dependencies']:
-            for dependency, version in dependencies.items():
-                new_version = self.__check_version(package_id, version)
-                dependencies[dependency] = new_version
+        for dependency, version in parent['dependencies'].items():
+            new_version = self.__check_version(package_id, version)
+            parent['dependencies'][dependency] = new_version
 
     def __check_version(self, package_id, version):
         """
@@ -159,7 +159,7 @@ class Utility:
         :return: A list of dependencies.
         """
         ns = self.ns
-        dependencies = []
+        dependencies = {}
         pom_dependencies = tree.xpath('//pom:dependencies/pom:dependency', namespaces=ns)
 
         for dependency in pom_dependencies:
@@ -167,7 +167,7 @@ class Utility:
             dependency_name = self.fix_name(dependency_name, parent_id)
             dependency_version = dependency.xpath('./pom:version', namespaces=ns)
             version = dependency_version[0].text if dependency_version else 'inherited'
-            dependencies.append({dependency_name: self.__check_version(package_id, version)})
+            dependencies[dependency_name] = self.__check_version(package_id, version)
 
         return dependencies
 
