@@ -128,9 +128,11 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# Files created during project run
 .idea
 releases/*
 new_releases/*
 tgfs/*
 structure.json
 structure.csv
+dependency_map.json

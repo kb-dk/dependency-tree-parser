@@ -46,8 +46,8 @@ def run(file_type, path='releases/'):
     else:
         logging.info('All poms assigned.')
 
-    # Update dependency versions
-    util.update_dependency_versions()
+    # Go through the dependencies to map the versions correctly to their <properties> assignments
+    util.fix_dependency_versions()
 
     # Remove 'alt-name' since it is redundant information at this point
     util.remove_alt_name()
@@ -56,9 +56,17 @@ def run(file_type, path='releases/'):
     if file_type == 'csv':
         util.write_csv()
     elif file_type == 'json':
+        write_dependency_map_json(util.dependency_map)
         util.write_json()
     else:
         print('Argument \'' + file_type + '\' is not a valid file-type, use csv or json.')
+
+
+def write_dependency_map_json(dependency_map):
+    """ Writes the dependency map to a .json file. """
+    with open('dependency_map.json', 'w') as output:
+        json.dump(dependency_map, output)
+    logging.info('Dependency map written to .json file.')
 
 
 if __name__ == '__main__':

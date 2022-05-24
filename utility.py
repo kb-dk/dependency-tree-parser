@@ -6,7 +6,6 @@ from configparser import ConfigParser
 
 
 class Utility:
-
     def __init__(self):
         self.ignored_parents = ['sbforge-parent', 'sbprojects-parent', 'oss-parent']
         self.strings_to_replace = ['${parent.artifactid}', '${parent.artifactId}', '${project.parent.artifactId}',
@@ -26,76 +25,80 @@ class Utility:
             format='%(asctime)s %(levelname)s: %(message)s',
             level=self.config.get("all", "logging_level").upper())
 
-    def map_dependency_version(self, package_id, version, tree):
+    def map_dependency_version(self, package_id, module_id, version, tree):
         """
         Maps dependencies that are defined using a name defined in <properties> tag, e.g. ${project.version}.
-        :param package_id: Package ID, e.g. 'org.biterepository' or 'dk.kb.netarchivesuite'
-        :param version: The version of the dependency
+        :param package_id: Package ID, e.g. 'org.biterepository' or 'dk.kb.netarchivesuite'.
+        :param module_id: The artifact ID found in the <parent> tag in the pom.
+        :param version: The version of the dependency.
         :param tree: The lxml etree.parse(path) tree object.
         """
         ns = self.ns
         properties = tree.xpath('./pom:properties', namespaces=ns)
-        old_maps = self.dependency_map[package_id] if package_id in self.dependency_map else []
-        maps = []
-        # FIXME: Case where version is ${project.version} needs to be handled differently, since every package_id can have multiple of these
-        # project_version_created = False
-        # for x in old_maps:
-        #     if '${project.version}' in x:
-        #         project_version_created = True
-        # if not project_version_created:
-        #     maps.append({'${project.version}': version})
+        for key, val in self.obj.items():
+            if package_id in val['alt-name']:
+                package_id = key
+                break
+
+        old_maps = self.dependency_map[package_id] if package_id in self.dependency_map else {}
+
+        maps = {module_id: {}}
+
+        # Adds a dependency map for 'project.version' -> version found in pom.
+        maps[module_id]['${project.version}'] = version
 
         for p in properties:
             for i in range(len(p)):
                 property_text = p[i].text
                 if '${' in property_text:
-                    property_text = self.__check_version(package_id, property_text)
+                    pass
+                    # FIXME: pull info from parent?
                 tag = str(p[i].tag).split('}', 1)[-1]
-                maps.append({'${' + tag + '}': property_text})
-        self.dependency_map[package_id] = old_maps + maps
+                maps[module_id]['${' + tag + '}'] = property_text
+        maps.update(old_maps)
+        self.dependency_map[package_id] = maps
 
-    def update_dependency_versions(self):
-        """
-        Updates the version of every dependency found, when traversing the dictionary object.
-        """
-        # FIXME: introduce recursion
-        for key, val in self.obj.items():
-            for parent in val['modules']:
-                self.update_version(key, parent)
-                for child in parent['modules']:
-                    self.update_version(key, child)
-                    for inner_child in child['modules']:
-                        self.update_version(key, inner_child)
-
-    def update_version(self, package_id, parent):
-        """
-        Runs through each dependency in the 'dependencies' key of the dictionary.
-        While running through these dependencies, their version is being updated.
-        :param package_id: The package ID.
-        :param parent: The modules that are currently being traversed.
-        """
-        for dependency, version in parent['dependencies'].items():
-            new_version = self.__check_version(package_id, version)
-            parent['dependencies'][dependency] = new_version
-
-    def __check_version(self, package_id, version):
+    def fix_dependency_versions(self):
         """
         Checks if the version of the given dependency is correct.
-        :param package_id: The package ID.
-        :param version: The current version.
         :return: Returns either a more readable version found in the dependency_map, or the original version.
         """
-        # If the package_id is an alternative name, we need to find the "correct" package_id.
         for key, val in self.obj.items():
-            if package_id in val['alt-name']:
-                package_id = key
+            package_id = key
+            for parent in self.obj[key]['modules']:
+                parent_id = parent['name']
+                self.__insert_new_version(parent, package_id, parent_id)
+                self.__recursive_fix_dependencies(package_id, parent_id, parent['modules'])
 
-        # If the version contains the chars '${', then we try to map it to a correct version
-        if version and '${' in version and package_id in self.dependency_map:
-            for i in self.dependency_map[package_id]:
-                if version in i:
-                    logging.debug(f'Updated version: {version} -> {i[version]}')
-                    return i[version]
+    def __recursive_fix_dependencies(self, package_id, parent_id, current):
+        """
+        Recursively runs through the dependencies of every module to try to fix their version ID by mapping them to the dependency map.
+        :param package_id: The package ID under which the modules are present in both the dependency map and the overall structure.
+        :param parent_id: The ID of the parent to every single module.
+        :param current: The current placement in the dictionary tree.
+        """
+        for module in current:
+            self.__insert_new_version(module, package_id, parent_id)
+            self.__recursive_fix_dependencies(package_id, parent_id, module['modules'])
+
+    def __insert_new_version(self, module, package_id, parent_id):
+        for dependency in module['dependencies']:
+            name, version = dependency, module['dependencies'][dependency]
+            new_version = self.__get_new_version(name, module, package_id, parent_id, version)
+            module['dependencies'][name] = new_version
+            logging.debug(f'Updated version: {name}:{version} -> {new_version}')
+
+    def __get_new_version(self, dependency, module, package_id, parent_id, version):
+        """
+        If the version contains the chars '${', then we try to map it to a correct version, running recursively
+        :return: New version
+        """
+        if version and '${' in version:
+            new_version = self.dependency_map[package_id][module['name']][version] \
+                if version in self.dependency_map[package_id][module['name']] else self.dependency_map[package_id][parent_id][version] \
+                if version in self.dependency_map[package_id][parent_id] else version
+            if new_version != version:
+                self.__get_new_version(dependency, module, package_id, parent_id, new_version)
         return version
 
     def create_package(self, package):
@@ -130,8 +133,8 @@ class Utility:
             tree.xpath('//pom:parent/pom:artifactId',
                        namespaces=ns)) != 0 else None
         # Maps the versions that are declared through properties in the parent pom to their actual values
-        self.map_dependency_version(package_id, version, tree)
-        dependencies = self.find_dependencies(tree, package_id, parent_id)
+        self.map_dependency_version(alt_package_id if package_id is None else package_id, child_id, version, tree)
+        dependencies = self.find_dependencies(tree, parent_id)
 
         return alt_package_id, child_id, dependencies, package_id, parent_id, version
 
@@ -144,17 +147,16 @@ class Utility:
         :return: Returns either the name of a name where the incorrect string has been replaced.
         """
         for string in self.strings_to_replace:
-            if string in name:
+            if string in name and parent_id is not None:
                 new_name = name.replace(string, parent_id)
                 logging.debug(f'Name changed: {name} -> {new_name}')
                 return new_name
         return name
 
-    def find_dependencies(self, tree, package_id, parent_id):
+    def find_dependencies(self, tree, parent_id):
         """
         Find the dependencies of the pom
         :param tree: The lxml etree.parse(path) tree object.
-        :param package_id: The package ID (Group ID) in the pom.
         :param parent_id: The parent ID (Artifact ID) of the <parent> tag in the pom.
         :return: A list of dependencies.
         """
@@ -167,8 +169,7 @@ class Utility:
             dependency_name = self.fix_name(dependency_name, parent_id)
             dependency_version = dependency.xpath('./pom:version', namespaces=ns)
             version = dependency_version[0].text if dependency_version else 'inherited'
-            dependencies[dependency_name] = self.__check_version(package_id, version)
-
+            dependencies[dependency_name] = version
         return dependencies
 
     def remove_alt_name(self):

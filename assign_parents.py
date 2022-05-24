@@ -22,9 +22,9 @@ def __find_parents(path, util):
         parent_id = tree.xpath('./pom:artifactId', namespaces=ns)[0].text.lower()
         version = 'n/a' if len(tree.xpath('./pom:version', namespaces=ns)) == 0 else tree.xpath('./pom:version', namespaces=ns)[0].text
         # Maps the versions that are declared through properties in the parent pom to their actual values
-        util.map_dependency_version(package_id, version, tree)
+        util.map_dependency_version(package_id, parent_id, version, tree)
         util.structure[package_id]['modules'].append(
-            {'name': parent_id, 'version': version, 'modules': [], 'dependencies': util.find_dependencies(tree, package_id, parent_id)})
+            {'name': parent_id, 'version': version, 'modules': [], 'dependencies': util.find_dependencies(tree, None)})
 
         return 1
     return 0

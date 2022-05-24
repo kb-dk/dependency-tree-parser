@@ -28,7 +28,7 @@ def __find_children(path, util, last_round=False):
             alt_list.append(alt_package_id)
 
         # Maps the versions that are declared through properties in the parent pom to their actual values
-        util.map_dependency_version(package_id, version, tree)
+        # FIXME: util.map_dependency_version(package_id, child_id, version, tree)
 
         # If parent exists in this layer, then insert child in modules list
         created = __recursive_add_children(parent_id, obj[package_id]['modules'], child_id, version, dependencies)
