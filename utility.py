@@ -84,11 +84,11 @@ class Utility:
     def __insert_new_version(self, module, package_id, parent_id):
         for dependency in module['dependencies']:
             name, version = dependency, module['dependencies'][dependency]
-            new_version = self.__get_new_version(name, module, package_id, parent_id, version)
+            new_version = self.__get_new_version(module, package_id, parent_id, version)
             module['dependencies'][name] = new_version
             logging.debug(f'Updated version: {name}:{version} -> {new_version}')
 
-    def __get_new_version(self, dependency, module, package_id, parent_id, version):
+    def __get_new_version(self, module, package_id, parent_id, version):
         """
         If the version contains the chars '${', then we try to map it to a correct version, running recursively
         :return: New version
@@ -97,8 +97,10 @@ class Utility:
             new_version = self.dependency_map[package_id][module['name']][version] \
                 if version in self.dependency_map[package_id][module['name']] else self.dependency_map[package_id][parent_id][version] \
                 if version in self.dependency_map[package_id][parent_id] else version
-            if new_version != version:
-                self.__get_new_version(dependency, module, package_id, parent_id, new_version)
+
+            if '${' in new_version:
+                new_version = self.__get_new_version(module, package_id, parent_id, new_version)
+            return new_version
         return version
 
     def create_package(self, package):
