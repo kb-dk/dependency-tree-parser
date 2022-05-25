@@ -1,19 +1,16 @@
 import logging
 
-from structure import Structure
-
 strings_to_replace = ['${parent.artifactid}', '${parent.artifactId}', '${project.parent.artifactId}', '${project.parent.artifactid}']
 
-structure = Structure()
-dependency_map, ns, obj = structure.dependency_map, structure.ns, structure.obj
 
-
-def get_pom_vars(tree):
+def get_pom_vars(tree, struct):
     """
     Given the tree object, read the tags and extract the information.
     :param tree: A lxml etree.parse(path) object.
+    :param struct: The structure object.
     :return: Alternative package ID, child ID, dependencies, package ID, parent ID, version
     """
+    ns = struct.ns
     # Find child artifactID
     child_id = tree.xpath('./pom:artifactId', namespaces=ns)[0].text.lower()
     # Use parents version if it does not have its own version defined.
@@ -30,20 +27,22 @@ def get_pom_vars(tree):
         tree.xpath('//pom:parent/pom:artifactId',
                    namespaces=ns)) != 0 else None
     # Maps the versions that are declared through properties in the parent pom to their actual values
-    map_dependency_version(alt_package_id if package_id is None else package_id, child_id, version, tree)
-    dependencies = find_dependencies(tree, parent_id)
+    map_dependency_version(alt_package_id if package_id is None else package_id, child_id, version, tree, struct)
+    dependencies = find_dependencies(tree, parent_id, ns)
 
     return alt_package_id, child_id, dependencies, package_id, parent_id, version
 
 
-def map_dependency_version(package_id, module_id, version, tree):
+def map_dependency_version(package_id, module_id, version, tree, struct):
     """
     Maps dependencies that are defined using a name defined in <properties> tag, e.g. ${project.version}.
     :param package_id: Package ID, e.g. 'org.biterepository' or 'dk.kb.netarchivesuite'.
     :param module_id: The artifact ID found in the <parent> tag in the pom.
     :param version: The version of the dependency.
     :param tree: The lxml etree.parse(path) tree object.
+    :param struct: The structure object.
     """
+    ns, obj, dependency_map = struct.ns, struct.obj, struct.dependency_map
     properties = tree.xpath('./pom:properties', namespaces=ns)
     for key, val in obj.items():
         if package_id in val['alt-name']:
@@ -69,11 +68,12 @@ def map_dependency_version(package_id, module_id, version, tree):
     dependency_map[package_id] = maps
 
 
-def find_dependencies(tree, parent_id):
+def find_dependencies(tree, parent_id, ns):
     """
     Find the dependencies of the pom
     :param tree: The lxml etree.parse(path) tree object.
     :param parent_id: The parent ID (Artifact ID) of the <parent> tag in the pom.
+    :param ns: The namespace, found in the structure, as defined in the config file.
     :return: A list of dependencies.
     """
     dependencies = {}
@@ -88,7 +88,7 @@ def find_dependencies(tree, parent_id):
     return dependencies
 
 
-def fix_dependency_versions():
+def fix_dependency_versions(obj, dependency_map):
     """
     Checks if the version of the given dependency is correct.
     :return: Returns either a more readable version found in the dependency_map, or the original version.
@@ -97,11 +97,11 @@ def fix_dependency_versions():
         package_id = key
         for parent in obj[key]['modules']:
             parent_id = parent['name']
-            __insert_new_version(parent, package_id, parent_id)
-            __recursive_fix_dependencies(package_id, parent_id, parent['modules'], parent_id)
+            __insert_new_version(parent, package_id, parent_id, dependency_map)
+            __recursive_fix_dependencies(package_id, parent_id, parent['modules'], parent_id, dependency_map)
 
 
-def __recursive_fix_dependencies(package_id, absolute_parent_id, current, closest_parent_id):
+def __recursive_fix_dependencies(package_id, absolute_parent_id, current, closest_parent_id, dependency_map):
     """
     Recursively runs through the dependencies of every module to try to fix their version ID by mapping them to the dependency map.
     :param package_id: The package ID under which the modules are present in both the dependency map and the overall structure.
@@ -109,23 +109,23 @@ def __recursive_fix_dependencies(package_id, absolute_parent_id, current, closes
     :param current: The current placement in the dictionary tree.
     """
     for module in current:
-        __insert_new_version(module, package_id, absolute_parent_id)
+        __insert_new_version(module, package_id, absolute_parent_id, dependency_map)
         module['name'] = __fix_name(module['name'], closest_parent_id)
-        __recursive_fix_dependencies(package_id, absolute_parent_id, module['modules'], module['name'])
+        __recursive_fix_dependencies(package_id, absolute_parent_id, module['modules'], module['name'], dependency_map)
 
 
-def __insert_new_version(module, package_id, parent_id):
+def __insert_new_version(module, package_id, parent_id, dependency_map):
     """
     Performs the actual insertion of the name into the structure dictionary object.
     """
     for dependency in module['dependencies']:
         name, version = dependency, module['dependencies'][dependency]
-        new_version = __get_new_version(module, package_id, parent_id, version)
+        new_version = __get_new_version(module, package_id, parent_id, version, dependency_map)
         module['dependencies'][name] = new_version
         logging.debug(f'Updated version: {name}:{version} -> {new_version}')
 
 
-def __get_new_version(module, package_id, parent_id, version):
+def __get_new_version(module, package_id, parent_id, version, dependency_map):
     """
     If the version contains the chars '${', then we try to map it to a correct version, running recursively
     :return: New version
@@ -136,7 +136,7 @@ def __get_new_version(module, package_id, parent_id, version):
             if version in dependency_map[package_id][parent_id] else version
 
         if '${' in new_version:
-            new_version = __get_new_version(module, package_id, parent_id, new_version)
+            new_version = __get_new_version(module, package_id, parent_id, new_version, dependency_map)
         return new_version
     return version
 

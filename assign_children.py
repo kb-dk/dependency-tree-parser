@@ -5,7 +5,7 @@ from lxml import etree
 from utility import get_pom_vars
 
 
-def __find_children(path, util, last_round=False):
+def __find_children(path, struct, last_round=False):
     """
     Runs through the poms and assigns children to their respective parents in the dictionary.
 
@@ -15,13 +15,13 @@ def __find_children(path, util, last_round=False):
     :param last_round: Used to indicate that it is the last run through of assigning poms.
     :return: Returns 1 of the pom was assigned in the dictionary, 0 otherwise.
     """
-    obj = util.obj
+    obj = struct.obj
     created = False
     tree = etree.parse(path)
-    alt_package_id, child_id, dependencies, package_id, parent_id, version = get_pom_vars(tree)
+    alt_package_id, child_id, dependencies, package_id, parent_id, version = get_pom_vars(tree, struct)
 
     # Skip pom if it has no <parent> or the <parent> tag contains specific strings.
-    if parent_id is None or (parent_id in util.ignored_parents):
+    if parent_id is None or (parent_id in struct.ignored_parents):
         return 0
     if package_id in obj:
         # Handle alternative names using extra groupIds defined in poms.
@@ -37,7 +37,7 @@ def __find_children(path, util, last_round=False):
         return 1
     # If child was not created due to parent not being found, try using alternative parent name
     elif not created:
-        created_using_alt_name = __find_children_alt_name(util, parent_id, package_id, child_id, alt_package_id, version, dependencies)
+        created_using_alt_name = __find_children_alt_name(struct, parent_id, package_id, child_id, alt_package_id, version, dependencies)
         # If created successfully return 1
         if created_using_alt_name:
             return 1

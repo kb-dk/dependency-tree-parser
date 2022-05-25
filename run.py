@@ -1,14 +1,27 @@
 import logging
 import os
 import sys
+from configparser import ConfigParser
 
 from assign_children import __find_children
 from assign_parents import __find_parents
 from structure import Structure
 from utility import fix_dependency_versions
 
-struct = Structure()
+config = ConfigParser()
+config.read("config.conf")
+number_of_runs = int(config.get("worker", "find_children_runs"))
+ns = {'pom': config.get("all", "namespace_url")}
+
+struct = Structure(number_of_runs, ns)
 obj, number_of_runs = struct.obj, struct.number_of_runs,
+
+
+def setup_logging():
+    """ Initializes the logging settings. """
+    logging.basicConfig(
+        format='%(asctime)s %(levelname)s: %(message)s',
+        level=config.get("all", "logging_level").upper())
 
 
 def run(file_type, path='releases/'):
@@ -46,7 +59,7 @@ def run(file_type, path='releases/'):
         logging.info('All poms assigned.')
 
     # Go through the dependencies to map the versions correctly to their <properties> assignments
-    fix_dependency_versions()
+    fix_dependency_versions(obj, struct.dependency_map)
 
     # Remove 'alt-name' since it is redundant information at this point
     struct.remove_alt_name()
@@ -74,7 +87,7 @@ def count_poms(path='releases/'):
 
 
 if __name__ == '__main__':
-    struct.setup_logging()
+    setup_logging()
     if len(sys.argv) < 2:
         print('Need file-type as argument. Specific path as 2nd argument is optional.')
         sys.exit(1)

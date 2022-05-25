@@ -1,26 +1,15 @@
 import csv
 import json
 import logging
-from configparser import ConfigParser
 
 
 class Structure:
-    def __init__(self):
+    def __init__(self, number_of_runs, ns):
         self.ignored_parents = ['sbforge-parent', 'sbprojects-parent', 'oss-parent']
         self.obj = {}
         self.dependency_map = {}
-        self.number_of_runs = 0
-        self.ns = ""
-        self.config = ConfigParser()
-        self.config.read("config.conf")
-        self.number_of_runs = int(self.config.get("worker", "find_children_runs"))
-        self.ns = {'pom': self.config.get("all", "namespace_url")}
-
-    def setup_logging(self):
-        """ Initializes the logging settings. """
-        logging.basicConfig(
-            format='%(asctime)s %(levelname)s: %(message)s',
-            level=self.config.get("all", "logging_level").upper())
+        self.number_of_runs = number_of_runs
+        self.ns = ns
 
     def create_package(self, package):
         """

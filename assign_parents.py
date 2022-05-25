@@ -24,9 +24,9 @@ def __find_parents(path, struct):
         parent_id = tree.xpath('./pom:artifactId', namespaces=ns)[0].text.lower()
         version = 'n/a' if len(tree.xpath('./pom:version', namespaces=ns)) == 0 else tree.xpath('./pom:version', namespaces=ns)[0].text
         # Maps the versions that are declared through properties in the parent pom to their actual values
-        map_dependency_version(package_id, parent_id, version, tree)
+        map_dependency_version(package_id, parent_id, version, tree, struct)
         struct.obj[package_id]['modules'].append(
-            {'name': parent_id, 'version': version, 'modules': [], 'dependencies': find_dependencies(tree, None)})
+            {'name': parent_id, 'version': version, 'modules': [], 'dependencies': find_dependencies(tree, None, ns)})
 
         return 1
     return 0
