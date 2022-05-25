@@ -59,9 +59,6 @@ def map_dependency_version(package_id, module_id, version, tree, struct):
     for p in properties:
         for i in range(len(p)):
             property_text = p[i].text
-            if '${' in property_text:
-                pass
-                # FIXME: pull info from parent?
             tag = str(p[i].tag).split('}', 1)[-1]
             maps[module_id]['${' + tag + '}'] = property_text
     maps.update(old_maps)
