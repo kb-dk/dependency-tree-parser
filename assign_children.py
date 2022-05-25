@@ -2,6 +2,8 @@ import logging
 
 from lxml import etree
 
+from utility import get_pom_vars
+
 
 def __find_children(path, util, last_round=False):
     """
@@ -16,7 +18,7 @@ def __find_children(path, util, last_round=False):
     obj = util.obj
     created = False
     tree = etree.parse(path)
-    alt_package_id, child_id, dependencies, package_id, parent_id, version = util.get_pom_vars(tree)
+    alt_package_id, child_id, dependencies, package_id, parent_id, version = get_pom_vars(tree)
 
     # Skip pom if it has no <parent> or the <parent> tag contains specific strings.
     if parent_id is None or (parent_id in util.ignored_parents):
@@ -26,9 +28,6 @@ def __find_children(path, util, last_round=False):
         alt_list = obj[package_id]['alt-name']
         if alt_package_id is not None and alt_package_id not in alt_list:
             alt_list.append(alt_package_id)
-
-        # Maps the versions that are declared through properties in the parent pom to their actual values
-        # FIXME: util.map_dependency_version(package_id, child_id, version, tree)
 
         # If parent exists in this layer, then insert child in modules list
         created = __recursive_add_children(parent_id, obj[package_id]['modules'], child_id, version, dependencies)
