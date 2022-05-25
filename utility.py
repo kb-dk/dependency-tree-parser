@@ -68,18 +68,19 @@ class Utility:
             for parent in self.obj[key]['modules']:
                 parent_id = parent['name']
                 self.__insert_new_version(parent, package_id, parent_id)
-                self.__recursive_fix_dependencies(package_id, parent_id, parent['modules'])
+                self.__recursive_fix_dependencies(package_id, parent_id, parent['modules'], parent_id)
 
-    def __recursive_fix_dependencies(self, package_id, parent_id, current):
+    def __recursive_fix_dependencies(self, package_id, absolute_parent_id, current, closest_parent_id):
         """
         Recursively runs through the dependencies of every module to try to fix their version ID by mapping them to the dependency map.
         :param package_id: The package ID under which the modules are present in both the dependency map and the overall structure.
-        :param parent_id: The ID of the parent to every single module.
+        :param absolute_parent_id: The ID of the parent to every single module.
         :param current: The current placement in the dictionary tree.
         """
         for module in current:
-            self.__insert_new_version(module, package_id, parent_id)
-            self.__recursive_fix_dependencies(package_id, parent_id, module['modules'])
+            self.__insert_new_version(module, package_id, absolute_parent_id)
+            module['name'] = self.__fix_name(module['name'], closest_parent_id)
+            self.__recursive_fix_dependencies(package_id, absolute_parent_id, module['modules'], module['name'])
 
     def __insert_new_version(self, module, package_id, parent_id):
         for dependency in module['dependencies']:
@@ -140,21 +141,6 @@ class Utility:
 
         return alt_package_id, child_id, dependencies, package_id, parent_id, version
 
-    # TODO: Use __fix_name to correct artifactIds (consider changing structure to use keys 'name' and 'version'
-    def fix_name(self, name, parent_id):
-        """
-        Used to fix the names of dependencies or artifact IDs of poms.
-        :param name: The name to fix.
-        :param parent_id: The parent ID that the name belongs to.
-        :return: Returns either the name of a name where the incorrect string has been replaced.
-        """
-        for string in self.strings_to_replace:
-            if string in name and parent_id is not None:
-                new_name = name.replace(string, parent_id)
-                logging.debug(f'Name changed: {name} -> {new_name}')
-                return new_name
-        return name
-
     def find_dependencies(self, tree, parent_id):
         """
         Find the dependencies of the pom
@@ -168,11 +154,25 @@ class Utility:
 
         for dependency in pom_dependencies:
             dependency_name = dependency.xpath('./pom:artifactId', namespaces=ns)[0].text
-            dependency_name = self.fix_name(dependency_name, parent_id)
+            dependency_name = self.__fix_name(dependency_name, parent_id)
             dependency_version = dependency.xpath('./pom:version', namespaces=ns)
             version = dependency_version[0].text if dependency_version else 'inherited'
             dependencies[dependency_name] = version
         return dependencies
+
+    def __fix_name(self, name, parent_id):
+        """
+        Used to fix the names of dependencies or artifact IDs of poms.
+        :param name: The name to fix.
+        :param parent_id: The parent ID that the name belongs to.
+        :return: Returns either the name of a name where the incorrect string has been replaced.
+        """
+        for string in self.strings_to_replace:
+            if string in name and parent_id is not None:
+                new_name = name.replace(string, parent_id)
+                logging.info(f'Name changed: {name} -> {new_name}')
+                return new_name
+        return name
 
     def remove_alt_name(self):
         """ Removes the 'alt-name' key from the dictionary."""

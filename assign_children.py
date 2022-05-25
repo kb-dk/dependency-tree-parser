@@ -99,7 +99,7 @@ def __add_child(child_id, version, dependencies, module):
     :param module: The index in the dictionary.
     :return: Returns True
     """
-    if not any(d.get(child_id) for d in module['modules']):
+    if child_id not in [x['name'] for x in module['modules']]:
         logging.debug(f'Created: {child_id}.')
         module['modules'].append({'name': child_id, 'version': version, 'modules': [], 'dependencies': dependencies})
     else:
