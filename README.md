@@ -6,4 +6,3 @@ server.
 Once this is done, run ```python3 run.py ARG``` where ```ARG``` is either 'json' or 'csv'. This will create a file in the project folder of
 the specified type.
 
-Currently, the 'csv' output is very primitive.
